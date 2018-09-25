@@ -1,51 +1,61 @@
+import * as $ from 'jquery';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterModule } from '@angular/router';
+import { CommonModule, LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpModule } from '@angular/http';
+import { Routes, RouterModule } from '@angular/router';
 
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { FullComponent } from './layouts/full/full.component';
+import { BlankComponent } from './layouts/blank/blank.component';
+
+import { NavigationComponent } from './shared/header-navigation/navigation.component';
+import { SidebarComponent } from './shared/sidebar/sidebar.component';
+import { BreadcrumbComponent } from './shared/breadcrumb/breadcrumb.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { SidebarModule } from 'ng-sidebar';
-import { AgmCoreModule } from '@agm/core';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
-import { AppRoutes } from './app.routing';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AdminLayoutComponent } from './layouts/admin/admin-layout.component';
-import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
-import { SharedModule } from './shared/shared.module';
+import { SpinnerComponent } from './shared/spinner.component';
 
-export function createTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true,
+  wheelSpeed: 2,
+  wheelPropagation: true,
+};
 
 @NgModule({
   declarations: [
     AppComponent,
-    AdminLayoutComponent,
-    AuthLayoutComponent
+    SpinnerComponent,
+    FullComponent,
+    BlankComponent,
+    NavigationComponent,
+    BreadcrumbComponent,
+    SidebarComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
-    BrowserAnimationsModule,
-    SharedModule,
-    RouterModule.forRoot(AppRoutes),
+    BrowserAnimationsModule,   
     FormsModule,
-    HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: (createTranslateLoader),
-        deps: [HttpClient]
-      }
-    }),
-    NgbModule.forRoot(),
-    SidebarModule.forRoot(),
-    AgmCoreModule.forRoot({apiKey: 'YOURAPIKEY'})
+    HttpModule,
+    NgbModule.forRoot(),  
+    PerfectScrollbarModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [
+      {
+      provide: PERFECT_SCROLLBAR_CONFIG,
+      useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+    },{
+    provide: LocationStrategy,
+    useClass: HashLocationStrategy
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,21 +1,24 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
 
 import { IconsRoutes } from './icons.routing';
-import { LineaComponent } from './linea/linea.component';
-import { FontawesomeComponent } from './fontawesome/fontawesome.component';
-import { SliComponent } from './sli/sli.component';
+import { fontawesomeComponent } from './fontawesome/fontawesome.component';
+import { SimplelineComponent } from './simpleline/simpleline.component';
+import { MaterialComponent } from './material/material.component';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule.forChild(IconsRoutes),
-    FormsModule,
-    ReactiveFormsModule
+    FormsModule
   ],
-  declarations: [LineaComponent, FontawesomeComponent, SliComponent]
+  declarations: [
+    fontawesomeComponent,
+    SimplelineComponent,
+    MaterialComponent
+  ]
 })
 
 export class IconsModule {}

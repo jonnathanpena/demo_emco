@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
+import {NgbProgressbarConfig} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-  selector: 'app-widgets',
-  templateUrl: './widgets.component.html',
-  styleUrls: ['./widgets.component.scss']
+	templateUrl: './widgets.component.html'
 })
-export class WidgetsComponent { }
+export class WidgetsComponent{
+	
+	constructor() {
+		
+	}
+
+	
+}

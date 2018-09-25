@@ -1,27 +1,30 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
-import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { FormsModule } from '@angular/forms';
+import { Routes, RouterModule } from '@angular/router';
+import { ChartsModule } from 'ng2-charts';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ChartistModule} from 'ng-chartist';
 
 import { ChartsRoutes } from './charts.routing';
-import { BarComponent } from './bar/bar.component';
-import { PieComponent } from './pie/pie.component';
-import { LineComponent } from './line/line.component';
-import { MiscComponent } from './misc/misc.component';
+import { ChartistjsComponent } from './chartist-js/chartistjs.component';
+import { DynamicChartComponent } from './chartist-js/dynamic.component';
+import { ChartjsComponent } from './chart-js/chartjs.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    ChartsModule,
+    NgbModule,
+    ChartistModule,
     RouterModule.forChild(ChartsRoutes),
-    NgxChartsModule
+    FormsModule
   ],
   declarations: [
-    BarComponent,
-    PieComponent,
-    LineComponent,
-    MiscComponent
+    ChartjsComponent,
+    DynamicChartComponent,
+    ChartistjsComponent
   ]
 })
 
-export class ChartsModule {}
+export class ChartModule {}

@@ -1,22 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+import { NotFoundComponent } from './404/not-found.component';
+import { LockComponent } from './lock/lock.component';
+import { LoginComponent } from './login/login.component';
+import { Login2Component } from './login2/login2.component';
+import { SignupComponent } from './signup/signup.component';
+import { Signup2Component } from './signup2/signup2.component';
 
 import { AuthenticationRoutes } from './authentication.routing';
-import { SigninComponent } from './signin/signin.component';
-import { SignupComponent } from './signup/signup.component';
-import { ForgotComponent } from './forgot/forgot.component';
-import { LockscreenComponent } from './lockscreen/lockscreen.component';
+
 
 @NgModule({
-  imports: [
+  imports: [ 
     CommonModule,
-    RouterModule.forChild(AuthenticationRoutes),
-    FormsModule,
-    ReactiveFormsModule
+    RouterModule.forChild(AuthenticationRoutes)
   ],
-  declarations: [SigninComponent, SignupComponent, ForgotComponent, LockscreenComponent]
+  declarations: [
+    NotFoundComponent,
+    LoginComponent,
+    SignupComponent,
+    LockComponent,
+    Login2Component,
+    Signup2Component
+  ]
 })
 
 export class AuthenticationModule {}

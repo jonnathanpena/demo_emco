@@ -1,35 +1,27 @@
 import { Routes } from '@angular/router';
 
-import { BarComponent } from './bar/bar.component';
-import { PieComponent } from './pie/pie.component';
-import { LineComponent } from './line/line.component';
-import { MiscComponent } from './misc/misc.component';
+import { ChartistjsComponent } from './chartist-js/chartistjs.component';
+import { ChartjsComponent } from './chart-js/chartjs.component';
 
-export const ChartsRoutes: Routes = [{
-  path: '',
-  children: [{
-    path: 'bar',
-    component: BarComponent,
-    data: {
-      heading: 'Bar'
-    }
-  }, {
-    path: 'pie',
-    component: PieComponent,
-    data: {
-      heading: 'Pie'
-    }
-  }, {
-    path: 'line',
-    component: LineComponent,
-    data: {
-      heading: 'Line'
-    }
-  }, {
-    path: 'misc',
-    component: MiscComponent,
-    data: {
-      heading: 'Misc'
-    }
-  }]
-}];
+export const ChartsRoutes: Routes = [
+  {
+    path: '',
+    children: [
+    {
+      path: 'chartistjs',
+      component: ChartistjsComponent,
+      data: {
+        title: 'Chartis js',
+        urls: [{title: 'Dashboard',url: '/dashboard'},{title: 'Chartis js Page'}]
+      }
+    }, 
+    {
+      path: 'chartjs',
+      component: ChartjsComponent,
+      data: {
+        title: 'Chart js',
+        urls: [{title: 'Dashboard',url: '/dashboard'},{title: 'Chart js Page'}]
+      }
+    }]
+  }
+];

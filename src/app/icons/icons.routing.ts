@@ -1,29 +1,35 @@
 import { Routes } from '@angular/router';
 
-import { LineaComponent } from './linea/linea.component';
-import { FontawesomeComponent } from './fontawesome/fontawesome.component';
-import { SliComponent } from './sli/sli.component';
+import { fontawesomeComponent } from './fontawesome/fontawesome.component';
+import { SimplelineComponent } from './simpleline/simpleline.component';
+import { MaterialComponent } from './material/material.component';
 
 export const IconsRoutes: Routes = [
   {
     path: '',
-    children: [{
-      path: 'linea',
-      component: LineaComponent,
-      data: {
-        heading: 'Linea Icons'
-      }
-    }, {
+    children: [
+    {
       path: 'fontawesome',
-      component: FontawesomeComponent,
+      component: fontawesomeComponent,
       data: {
-        heading: 'FontAwesome Icons'
+        title: 'FontAwesome',
+        urls: [{title: 'Dashboard',url: '/dashboard'},{title: 'FontAwesome'}]
       }
-    }, {
-      path: 'sli',
-      component: SliComponent,
+    }, 
+    {
+      path: 'simpleline',
+      component: SimplelineComponent,
       data: {
-        heading: 'Simple Line Icons'
+        title: 'Simple-Line-Icon',
+        urls: [{title: 'Dashboard',url: '/dashboard'},{title: 'Simple-Line-Icon'}]
+      }
+    },
+    {
+      path: 'material',
+      component: MaterialComponent,
+      data: {
+        title: 'Material-Icon',
+        urls: [{title: 'Dashboard',url: '/dashboard'},{title: 'Material-Icon'}]
       }
     }]
   }
