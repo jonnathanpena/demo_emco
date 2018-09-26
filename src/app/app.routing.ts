@@ -8,15 +8,8 @@ export const AppRoutes: Routes = [{
   component: AdminLayoutComponent,
   children: [
   {
-    path: '',
-    loadChildren: './dashboard/dashboard.module#DashboardModule'
-  },
-  {
     path: 'usuarios',
     loadChildren: './usuarios/usarios.module#UsuariosModule'
-  }, {
-    path: 'email',
-    loadChildren: './email/email.module#EmailModule'
   }, {
     path: 'components',
     loadChildren: './components/components.module#ComponentsModule'
@@ -27,20 +20,11 @@ export const AppRoutes: Routes = [{
     path: 'cards',
     loadChildren: './cards/cards.module#CardsModule'
   }, {
-    path: 'forms',
-    loadChildren: './form/form.module#FormModule'
-  }, {
     path: 'tables',
     loadChildren: './tables/tables.module#TablesModule'
   }, {
     path: 'datatable',
     loadChildren: './datatable/datatable.module#DatatableModule'
-  }, {
-    path: 'charts',
-    loadChildren: './charts/charts.module#ChartsModule'
-  }, {
-    path: 'maps',
-    loadChildren: './maps/maps.module#MapsModule'
   }, {
     path: 'pages',
     loadChildren: './pages/pages.module#PagesModule'

@@ -1,6 +1,6 @@
-import { RouteInfo } from './sidebar.metadata';
+//import { RouteInfo } from './sidebar.metadata';
 
-export const ROUTES: RouteInfo[] = [
+export const ROUTES = [
   {
     path: '/inicio',
     title: 'Dashboards',

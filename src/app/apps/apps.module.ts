@@ -8,7 +8,6 @@ import { QuillModule } from 'ngx-quill';
 import { DragulaModule } from 'ng2-dragula/ng2-dragula';
 
 import { AppsRoutes } from './apps.routing';
-import { EmailComponent } from './email/email.component';
 import { TaskboardComponent } from './taskboard/taskboard.component';
 import { FullcalendarComponent } from './fullcalendar/fullcalendar.component';
 
@@ -23,7 +22,6 @@ import { FullcalendarComponent } from './fullcalendar/fullcalendar.component';
     RouterModule.forChild(AppsRoutes)
   ],
   declarations: [
-    EmailComponent,
     TaskboardComponent,
     FullcalendarComponent
   ]
