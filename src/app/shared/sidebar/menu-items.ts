@@ -1,46 +1,42 @@
 import { RouteInfo } from './sidebar.metadata';
 
 export const ROUTES: RouteInfo[] = [
-    {
-        path: '', title: 'Tienda Asociada 1', icon: '', class: 'nav-small-cap', label: '', labelClass: '', extralink: true, submenu: []
-    },
-    {
-        path: '/', title: 'Inicio', icon: '', class: 'nav-small-cap', label: '', labelClass: '', extralink: false, submenu: []
-    },
-    {
-        path: '/', title: 'Pedido', icon: '', class: 'has-arrow', label:'', labelClass: '', extralink: false, 
-        submenu: [
-            { path: '/pedido/ingresados', title: 'Ingresados', icon:'', class: '', label:'2', labelClass: 'label label-rouded label-themecolor pull-right', extralink: false, submenu: [] },
-            { path: '/pedido/olvidados', title: 'Olvidados', icon:'', class: '', label:'1', labelClass: 'label label-rouded label-themecolor pull-right', extralink: false, submenu: [] },
-            { path: '/pedido/listado-pedidos', title: 'Listado por Fecha', icon:'', class: '', label:'', labelClass: '', extralink: false, submenu: [] }            
-        ]
-    },
-    {
-        path: '/', title: 'Informes', icon: '', class: 'has-arrow', label:'', labelClass: '', extralink: false, 
-        submenu: [
-            { path: '/informes/estadistica', title: 'Estadística', icon:'', class: '', label:'', labelClass: '', extralink: false, submenu: [] },
-            { path: '/informes/reportes-venta', title: 'Reportes de Venta', icon:'', class: '', label:'', labelClass: '', extralink: false, submenu: [] },
-            { path: '/informes/comisiones-generadas', title: 'Comisiones Generadas', icon:'', class: '', label:'', labelClass: '', extralink: false, submenu: [] }            
-        ]
-    },
-    {
-        path: '/', title: 'Artículos', icon: '', class: 'has-arrow', label:'', labelClass: '', extralink: false, 
-        submenu: [
-            { path: '/articulos/crear-item', title: 'Crear Ítem', icon:'', class: '', label:'', labelClass: '', extralink: false, submenu: [] },
-            { path: '/articulos/crear-categoria', title: 'Crear Categoría', icon:'', class: '', label:'', labelClass: '', extralink: false, submenu: [] },
-            { path: '/articulos/crear-subcategoria', title: 'Crear Subcategoría', icon:'', class: '', label:'', labelClass: '', extralink: false, submenu: [] },
-            { path: '/articulos/listado-items', title: 'Listado Ítems', icon:'', class: '', label:'', labelClass: '', extralink: false, submenu: [] }                        
-        ]
-    },
-    {
-        path: '/', title: 'Valoraciones', icon: '', class: 'has-arrow', label:'', labelClass: '', extralink: false, 
-        submenu: [
-            { path: '/valoraciones/calificaciones', title: 'Calificaciones', icon:'', class: '', label:'', labelClass: '', extralink: false, submenu: [] },
-            { path: '/valoraciones/comentarios-sugerencias', title: 'Comentarios y Sugerencias', icon:'', class: '', label:'', labelClass: '', extralink: false, submenu: [] }          
-        ]
-    },
-    {
-        path: '', title: 'Dashboards', icon: 'mdi mdi-gauge', class: 'has-arrow', label: '4', labelClass: 'label label-rouded label-themecolor pull-right', extralink: false,
+  {
+    path: '/inicio',
+    title: 'Dashboards',
+    icon: 'mdi mdi-gauge',
+    class: '',
+    extralink: false,
+    submenu: []
+  },
+  {
+    path: '',
+    title: 'Usuarios',
+    icon: 'mdi mdi-account-multiple',
+    class: 'has-arrow',
+    extralink: false,
+    submenu: [
+        { path: '/usuarios/crear', title: 'Nuevo', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+        { path: '/usuarios', title: 'Usuarios', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+    ]
+  },
+  {
+    path: '',
+    title: 'Solicitudes',
+    icon: 'mdi mdi-equal-box',
+    class: 'has-arrow',
+    extralink: false,
+    submenu: [
+        { path: '/solicitudes/crear', title: 'Nueva', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+        { path: '/solicitudes', title: 'Solicitudes', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+    ]
+  }
+    /*{
+        path: '',
+        title: 'Dashboards',
+        icon: 'mdi mdi-gauge',
+        class: 'has-arrow',
+        extralink: false,
         submenu: [
             { path: '/dashboard/dashboard1', title: 'Modern', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
             { path: '/dashboard/dashboard2', title: 'Classic', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
@@ -83,7 +79,7 @@ export const ROUTES: RouteInfo[] = [
             { path: '/extra-component/upload', title: 'Form Validation', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
             { path: '/extra-component/editor', title: 'Form Typehead', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
             { path: '/extra-component/dragndrop', title: 'Datepicker', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
-            
+
         ]
     },
     {
@@ -96,7 +92,7 @@ export const ROUTES: RouteInfo[] = [
             { path: '/forms/formvalidation', title: 'Form Validation', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
             { path: '/component/typehead', title: 'Form Typehead', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
             { path: '/component/datepicker', title: 'Datepicker', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
-            
+
         ]
     },
     {
@@ -118,7 +114,7 @@ export const ROUTES: RouteInfo[] = [
         submenu: [
             { path: '/charts/chartjs', title: 'Chart Js', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
             { path: '/charts/chartistjs', title: 'Chartist Js', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
-            
+
         ]
     },
     {
@@ -166,6 +162,6 @@ export const ROUTES: RouteInfo[] = [
                 ]
             },
         ]
-    }     
+    }*/
 ];
 

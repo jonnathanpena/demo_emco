@@ -6,9 +6,14 @@ import { AuthLayoutComponent } from './layouts/auth/auth-layout.component';
 export const AppRoutes: Routes = [{
   path: '',
   component: AdminLayoutComponent,
-  children: [{
+  children: [
+  {
     path: '',
     loadChildren: './dashboard/dashboard.module#DashboardModule'
+  },
+  {
+    path: 'usuarios',
+    loadChildren: './usuarios/usarios.module#UsuariosModule'
   }, {
     path: 'email',
     loadChildren: './email/email.module#EmailModule'

@@ -21,7 +21,9 @@ export const routes: Routes = [
         { path: 'widgets', loadChildren: './widgets/widgets.module#WidgetsModule' },
         { path: 'extra-component', loadChildren: './extra-component/extra-component.module#ExtraComponentsModule' },
         { path: 'apps', loadChildren: './apps/apps.module#AppsModule' },
-        { path: 'sample-pages', loadChildren: './sample-pages/sample-pages.module#SamplePagesModule' }
+        { path: 'sample-pages', loadChildren: './sample-pages/sample-pages.module#SamplePagesModule' },
+        { path: 'usuarios', loadChildren: './usuarios/usarios.module#UsuariosModule'},
+        { path: 'solicitudes', loadChildren: './solicitudes/solicitudes.module#SolicitudesModule'}
     ]
 },
 {
@@ -33,10 +35,10 @@ export const routes: Routes = [
             loadChildren: './authentication/authentication.module#AuthenticationModule'
         }
     ]
-}, 
+},
 {
     path: '**',
-    redirectTo: '404' 
+    redirectTo: '404'
 }];
 
 @NgModule({
