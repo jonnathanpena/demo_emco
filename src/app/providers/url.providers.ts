@@ -73,4 +73,32 @@ export class ULRProvider {
   }
   /* FIN USUARIO DEPARTAMENTO */
 
+  /* FORMULARIO     */
+  public getAllFormularios() {
+    return this.dominio + 'formulario/getAll.php';
+  }
+
+  public getFormularioById() {
+    return this.dominio + 'formulario/getById.php';
+  }
+
+  public getFormularioIdMax() {
+    return this.dominio + 'formulario/getIdMax.php';
+  }
+
+  public getFormulariosByUsuario() {
+    return this.dominio + 'formulario/getByIdUser.php';
+  }
+
+  public insertFormulario() {
+    return this.dominio + 'formulario/insert.php';
+  }
+  /* FIN FORMULARIO */
+
+  /* DETALLE FORMULARIO     */
+  public insertDetalleFormulario() {
+    return this.dominio + 'detalleFormulario/insert.php';
+  }
+  /* FIN DETALLE FORMULARIO */
+
 }

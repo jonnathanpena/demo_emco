@@ -10,13 +10,39 @@ export class  SolicitudesProvider {
     private http: Http,
     private urlProvider: ULRProvider) {}
 
-  public allProvincias() {
-    return this.http.get(this.urlProvider.getAllProvincias())
+  public allFormularios() {
+    return this.http.get(this.urlProvider.getAllFormularios())
     .map((res: Response) => res.json());
   }
 
-  public allCantonesByProvincia(objeto: any) {
-    return this.http.post(this.urlProvider.getCantonesByProvincia(), JSON.stringify(objeto), {
+  public formularioIdMax() {
+    return this.http.get(this.urlProvider.getFormularioIdMax())
+    .map((res: Response) => res.json());
+  }
+
+  public formularioById(objeto: any) {
+    return this.http.post(this.urlProvider.getFormularioById(), JSON.stringify(objeto), {
+      headers: new Headers({'Content-Type': 'application/json'})
+    })
+      .map((res: Response) => res);
+  }
+
+  public formularioByUsuario(objeto: any) {
+    return this.http.post(this.urlProvider.getFormulariosByUsuario(), JSON.stringify(objeto), {
+      headers: new Headers({'Content-Type': 'application/json'})
+    })
+      .map((res: Response) => res);
+  }
+
+  public insertFormulario(objeto: any) {
+    return this.http.post(this.urlProvider.insertFormulario(), JSON.stringify(objeto), {
+      headers: new Headers({'Content-Type': 'application/json'})
+    })
+      .map((res: Response) => res);
+  }
+
+  public insertDetalleFormulario(objeto: any) {
+    return this.http.post(this.urlProvider.insertDetalleFormulario(), JSON.stringify(objeto), {
       headers: new Headers({'Content-Type': 'application/json'})
     })
       .map((res: Response) => res);

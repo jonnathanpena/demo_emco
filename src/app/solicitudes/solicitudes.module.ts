@@ -9,6 +9,7 @@ import { ListarSolicitudesComponent } from './listar/listar-solicitudes.componen
 
 import { ULRProvider } from '../providers/url.providers';
 import { SolicitudesProvider } from './solicitudes.providers';
+import { XlsxToJsonService } from './xlsx-to-json-service';
 
 import {
   DxTextBoxModule,
@@ -19,7 +20,8 @@ import {
   DxDataGridModule,
   DxBulletModule,
   DxTemplateModule,
-  DxFileUploaderModule
+  DxFileUploaderModule,
+  DxDateBoxModule
 } from 'devextreme-angular';
 
 @NgModule({
@@ -35,7 +37,8 @@ import {
     DxDataGridModule,
     DxBulletModule,
     DxTemplateModule,
-    DxFileUploaderModule
+    DxFileUploaderModule,
+    DxDateBoxModule
   ],
   declarations: [
     CrearSolicitudComponent,
@@ -43,7 +46,8 @@ import {
   ],
   providers: [
     ULRProvider,
-    SolicitudesProvider
+    SolicitudesProvider,
+    XlsxToJsonService
   ]
 })
 

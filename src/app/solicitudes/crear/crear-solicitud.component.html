@@ -7,17 +7,16 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Usuario</label>
-                                <dx-text-box class="form-control" value="Jonnathan" [disabled]="true">
+                                <dx-text-box class="form-control" value="Jonnathan" [disabled]="true" [(value)]="usuario.nombre">
                                 </dx-text-box>
                             </div>
                             <div class="form-group">
                                 <label>Fecha</label>
-                                <dx-text-box class="form-control" value="26/9/2018" [disabled]="true">
-                                </dx-text-box>
+                                <dx-date-box [value]="now" type="date" [disabled]="true" style="width: 100%;"></dx-date-box>
                             </div>
                             <div class="form-group">
                                 <label>Transacción</label>
-                                <dx-text-box class="form-control" mask="IT-000">
+                                <dx-text-box class="form-control" [(value)]="formulario.de_transaccion" [disabled]="true">
                                     <dx-validator>
                                         <dxi-validation-rule type="required" message="Transacción es requerida"></dxi-validation-rule>
                                     </dx-validator>
@@ -26,8 +25,8 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Solicitud</label>
-                                <dx-text-box mode="number" class="form-control">
+                                <label>Solicitud($)</label>
+                                <dx-text-box mode="number" class="form-control" [(value)]="formulario.de_valor_solicitud">
                                     <dx-validator>
                                         <dxi-validation-rule type="required" message="Monto de solicitud es requerida"></dxi-validation-rule>
                                     </dx-validator>
@@ -35,7 +34,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Justificación</label>
-                                <dx-text-box class="form-control">
+                                <dx-text-box class="form-control" [(value)]="formulario.de_justificacion">
                                     <dx-validator>
                                         <dxi-validation-rule type="required" message="Justificación es requerida"></dxi-validation-rule>
                                     </dx-validator>
@@ -83,7 +82,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Solicitud</label>
+                                <label>Monto</label>
                                 <dx-text-box mode="number" class="form-control">
                                     <dx-validator>
                                         <dxi-validation-rule type="required" message="Monto de solicitud es requerida"></dxi-validation-rule>
@@ -116,7 +115,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <button class="btn btn-info" type="button" style="margin-bottom: 10px;"><i class="fa fa-file-excel-o"></i></button>
+                <input type="file" (change)="handleFile($event)" />
                 <dx-data-grid [dataSource]="solicitudes" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true">
 
                     <dxo-paging [pageSize]="10"></dxo-paging>
