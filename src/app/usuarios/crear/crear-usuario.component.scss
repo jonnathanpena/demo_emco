@@ -1,0 +1,12 @@
+.form-control {
+    display: inherit;
+}
+
+dx-text-box {
+    padding: 0;
+}
+
+::ng-deep dx-text-box div.dx-texteditor-container input.dx-texteditor-input {
+    width: 100%;
+    border: 0;
+}

@@ -1,1 +1,61 @@
-Crear usuario
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form (submit)="crearUsuario()" class="form-horizontal m-t-40">
+                    <div class="form-group row p-t-20">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Nombre</label>
+                                <dx-text-box [(value)]="usuario.de_nombre_per" class="form-control">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="Nombre es requerido"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Apellido</label>
+                                <dx-text-box [(value)]="usuario.de_apellido_per" class="form-control">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="Apellido es requerido"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Celular</label>
+                                <dx-text-box [(value)]="usuario.de_celular_per" class="form-control">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="Celular es requerido"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Provincia</label>
+                                <dx-select-box [items]="provincias" displayExpr="nombre_intprov" valueExpr="id_intprov" [searchEnabled]="true">
+                                    <dxi-validation-rule type="required" message="Provincia es requerida"></dxi-validation-rule>
+                                </dx-select-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Cantón</label>
+                                <dx-select-box [items]="cantones" displayExpr="nombre_intcant" valueExpr="id_intcant" [searchEnabled]="true">
+                                    <dxi-validation-rule type="required" message="Cantón es requerida"></dxi-validation-rule>
+                                </dx-select-box>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Correo Electrónico</label>
+                                <dx-text-box [(value)]="usuario.de_correo_per" class="form-control">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="Correo electrónico es requerido"></dxi-validation-rule>
+                                        <dxi-validation-rule type="email" message="Formato inválido"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
