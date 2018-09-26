@@ -1,0 +1,164 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form (submit)="guardarForm1($event)" class="form-horizontal m-t-40">
+                    <div class="form-group row p-t-20">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Usuario</label>
+                                <dx-text-box class="form-control" value="Jonnathan" [disabled]="true">
+                                </dx-text-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Fecha</label>
+                                <dx-text-box class="form-control" value="26/9/2018" [disabled]="true">
+                                </dx-text-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Transacción</label>
+                                <dx-text-box class="form-control" mask="IT-000">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="Transacción es requerida"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Solicitud</label>
+                                <dx-text-box mode="number" class="form-control">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="Monto de solicitud es requerida"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Justificación</label>
+                                <dx-text-box class="form-control">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="Justificación es requerida"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Adjuntar archivo</label>
+                                <dx-file-uploader uploadUrl="http://proconty.com/API/demo/upload/upload.php" name="file" (onUploaded)="uploaded($event)" (onUploadError)="uploadError($event)" [multiple]="false" accept="*" [(value)]="imagenes" uploadMode="instantly"></dx-file-uploader>
+                            </div>
+                        </div>
+                        <dx-button icon="remove" style="margin-left: 10px; display: right" type="danger" [disabled]="guardando" text="Cancelar" (click)="cancelar()"></dx-button>
+                        <dx-button icon="check" style="margin-left: 10px; display: right" type="success" [useSubmitBehavior]="true" [disabled]="guardando" text="Enviar"></dx-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form (submit)="guardarForm2($event)" class="form-horizontal m-t-40">
+                    <div class="form-group row p-t-20">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Usuario</label>
+                                <dx-text-box class="form-control" value="Jonnathan" [disabled]="true">
+                                </dx-text-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Fecha</label>
+                                <dx-text-box class="form-control" value="26/9/2018" [disabled]="true">
+                                </dx-text-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Transacción</label>
+                                <dx-text-box class="form-control" mask="VT-000">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="Transacción es requerida"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Solicitud</label>
+                                <dx-text-box mode="number" class="form-control">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="Monto de solicitud es requerida"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Motivo</label>
+                                <dx-text-box class="form-control">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="Justificación es requerida"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Adjuntar archivo</label>
+                                <dx-file-uploader uploadUrl="http://proconty.com/API/demo/upload/upload.php" name="file" (onUploadError)="uploadError($event)" [multiple]="true" accept="*" [(value)]="imagenes" uploadMode="instantly"></dx-file-uploader>
+                            </div>
+                        </div>
+                        <dx-button icon="remove" style="margin-left: 10px; display: right" type="danger" [disabled]="guardando" text="Cancelar" (click)="cancelar()"></dx-button>
+                        <dx-button icon="check" style="margin-left: 10px; display: right" type="success" [useSubmitBehavior]="true" [disabled]="guardando" text="Guardar"></dx-button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <button class="btn btn-info" type="button" style="margin-bottom: 10px;"><i class="fa fa-file-excel-o"></i></button>
+                <dx-data-grid [dataSource]="solicitudes" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true">
+
+                    <dxo-paging [pageSize]="10"></dxo-paging>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]" infoText="Page #{0}. Total: {1} ({2} usuarios)"></dxo-pager>
+                    <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+
+                    <dxi-column dataField="de_id_usuario" caption="Usuario"></dxi-column>
+                    <dxi-column dataField="de_fecha_creacion" caption="Fecha"></dxi-column>
+                    <!--<dxi-column caption="Discount %" dataField="Discount" cellTemplate="discountCellTemplate" dataType="number" format="percent" alignment="right" [allowGrouping]="false" cssClass="bullet"></dxi-column>-->
+                    <dxi-column dataField="de_transaccion" caption="Transacción"></dxi-column>
+                    <dxi-column dataField="de_valor_solicitud" caption="Monto"></dxi-column>
+                    <dxi-column dataField="de_justificacion" caption="Justificación/Motivo"></dxi-column>
+                    <!--<dxi-column dataField="Region" dataType="string"></dxi-column>
+                <dxi-column dataField="Sector" dataType="string"></dxi-column>
+                <dxi-column dataField="Channel" dataType="string"></dxi-column>
+                <dxi-column dataField="Customer" dataType="string" [width]="150"></dxi-column>-->
+
+                    <!--<div *dxTemplate="let d of 'discountCellTemplate'">
+                      <div class="chart-cell">
+                          <dx-bullet
+                              [showTarget]="false"
+                              [showZeroLevel]="true"
+                              [startScaleValue]="0"
+                              [endScaleValue]="100"
+                              [value]="d.value * 100">
+                              <dxo-size [width]="150" [height]="35"></dxo-size>
+                              <dxo-tooltip
+                                  [enabled]="true"
+                                  [paddingTopBottom]="2"
+                                  [customizeTooltip]="customizeTooltip">
+                                  <dxo-font [size]="18"></dxo-font>
+                              </dxo-tooltip>
+                              <dxo-margin
+                                  [top]="5"
+                                  [bottom]="0"
+                                  [left]="5"
+                              ></dxo-margin>
+                          </dx-bullet>
+                      </div>
+                  </div>-->
+                </dx-data-grid>
+            </div>
+        </div>
+    </div>
+</div>
