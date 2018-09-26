@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import notify from 'devextreme/ui/notify';
+import { UsuariosProvider } from '../usuarios.providers';
 
 @Component({
   templateUrl: './crear-usuario.component.html',
@@ -21,10 +22,18 @@ export class CrearUsuarioComponent implements OnInit {
     confirme: '',
     de_persona_id: ''
   };
+  usuario_departamento: any = {
+    de_user_id: '',
+    de_dpto_id: ''
+  };
   provincias: any = [];
   cantones: any = [];
+  departamentos: any = [];
+  guardando: any = false;
 
-  constructor() {}
+  constructor(
+    private services: UsuariosProvider
+  ) {}
 
   ngOnInit() {
     this.usuario = {
@@ -40,20 +49,108 @@ export class CrearUsuarioComponent implements OnInit {
       confirme: '',
       de_persona_id: ''
     };
-    this.provincias = [
-      {
-        id_intprov: 0,
-        nombre_intprov: 'Machala'
-      }
-    ];
-    this.cantones = [
-      {
-        id_intcant: 0,
-        nombre_intcant: 'Canton 1',
-        prov_canton_id: 1
-      }
-    ];
+    this.cantones = [];
+    this.provincias = [];
+    this.departamentos = [];
+    this.guardando = false;
+    this.usuario_departamento = {
+      de_user_id: '',
+      de_dpto_id: ''
+    };
+    this.services.allProvincias().subscribe(response =>  {
+      this.provincias = response.data;
+    });
+    this.services.allDepartamentos().subscribe(response => {
+      this.departamentos = response.data;
+    });
   }
 
-  crearUsuario() {}
+  guardar(e) {
+    e.preventDefault();
+    this.guardando = true;
+    this.validarDatos();
+  }
+
+  validarDatos() {
+    if (this.usuario.de_clave !== this.usuario.confirme) {
+      notify('Las claves no coinciden', 'error', 2000);
+      this.guardando = false;
+      this.usuario.confirme = '';
+      this.usuario.de_clave = '';
+    } else {
+      if (this.usuario.de_canton_per === '' || this.usuario_departamento.de_dpto_id === '') {
+        notify('Debe seleccionar provincia, cantón y depatamento', 'error', 2000);
+        this.guardando = false;
+      } else {
+        this.insertPersona();
+      }
+    }
+  }
+
+  insertPersona() {
+    this.services.insertPersona(this.usuario).subscribe(response => {
+      if (response['_body'] !== 'false' || response['_body'] !== false) {
+        this.usuario.de_persona_id = response['_body'];
+        this.insertUsuario();
+      } else {
+        notify('Algo malo ocurrió, verifique los datos e intente nuevamente', 'error', 1000);
+        this.cancelar();
+      }
+    });
+  }
+
+  insertUsuarioDepartamento() {
+    this.services.insertUsuarioDepartamento(this.usuario_departamento).subscribe(response => {
+      if (response['_body'] !== 'false' || response['_body'] !== false) {
+        notify('Usuario agregado exitosamente', 'success', 2000);
+      } else {
+        notify('Algo malo ocurrió, verifique los datos e intente nuevamente', 'error', 1000);
+      }
+      this.cancelar();
+    });
+  }
+
+  insertUsuario() {
+    this.services.insertUsuario(this.usuario).subscribe(response => {
+      if (response['_body'] !== 'false' || response['_body'] !== false) {
+        this.usuario_departamento.de_user_id = response['_body'];
+        this.insertUsuarioDepartamento();
+      } else {
+        notify('Algo malo ocurrió, verifique los datos e intente nuevamente', 'error', 1000);
+        this.cancelar();
+      }
+    });
+  }
+
+  cambiaProvincia(e) {
+    const id = e.value * 1;
+    this.services.allCantonesByProvincia({prov_canton_id: id}).subscribe(response => {
+      const cantones = JSON.parse(response['_body']);
+      this.cantones = cantones.data;
+    });
+  }
+
+  cambiaCanton(e) {
+    const id = e.value * 1;
+    this.usuario.de_canton_per = id;
+  }
+
+  cambiaDepartamento(e) {
+    const id = e.value * 1;
+    this.usuario_departamento.de_dpto_id = id;
+  }
+
+  cancelar() {
+    this.usuario.de_id_persona = '';
+    this.usuario.de_nombre_per = '';
+    this.usuario.de_apellido_per = '';
+    this.usuario.de_celular_per = '';
+    this.usuario.de_correo_per = '';
+    this.usuario.de_id_user = '';
+    this.usuario.de_usuario = '';
+    this.usuario.de_clave = '';
+    this.usuario.confirme = '';
+    this.usuario.de_persona_id = '';
+    this.guardando = false;
+  }
 }

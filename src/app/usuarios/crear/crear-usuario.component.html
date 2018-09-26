@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <form (submit)="crearUsuario()" class="form-horizontal m-t-40">
+                <form (submit)="guardar($event)" class="form-horizontal m-t-40">
                     <div class="form-group row p-t-20">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -23,7 +23,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Celular</label>
-                                <dx-text-box [(value)]="usuario.de_celular_per" class="form-control">
+                                <dx-text-box [(value)]="usuario.de_celular_per" class="form-control" mask="(000) 000-0000">
                                     <dx-validator>
                                         <dxi-validation-rule type="required" message="Celular es requerido"></dxi-validation-rule>
                                     </dx-validator>
@@ -31,13 +31,13 @@
                             </div>
                             <div class="form-group">
                                 <label>Provincia</label>
-                                <dx-select-box [items]="provincias" displayExpr="nombre_intprov" valueExpr="id_intprov" [searchEnabled]="true">
-                                    <dxi-validation-rule type="required" message="Provincia es requerida"></dxi-validation-rule>
+                                <dx-select-box [items]="provincias" displayExpr="nombre_intprov" valueExpr="id_intprov" [searchEnabled]="true" (onValueChanged)="cambiaProvincia($event)" placeholder="Seleccione...">
+                                    <dxi-validation-rule type="instance" message="Provincia es requerida"></dxi-validation-rule>
                                 </dx-select-box>
                             </div>
                             <div class="form-group">
                                 <label>Cantón</label>
-                                <dx-select-box [items]="cantones" displayExpr="nombre_intcant" valueExpr="id_intcant" [searchEnabled]="true">
+                                <dx-select-box [items]="cantones" displayExpr="nombre_intcant" valueExpr="id_intcant" [searchEnabled]="true" (onValueChanged)="cambiaCanton($event)" placeholder="Seleccione...">
                                     <dxi-validation-rule type="required" message="Cantón es requerida"></dxi-validation-rule>
                                 </dx-select-box>
                             </div>
@@ -52,7 +52,39 @@
                                     </dx-validator>
                                 </dx-text-box>
                             </div>
+                            <div class="form-group">
+                                <label>Usuario</label>
+                                <dx-text-box [(value)]="usuario.de_usuario" class="form-control">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="Usuario es requerido"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Contraseña</label>
+                                <dx-text-box mode="password" [(value)]="usuario.de_clave" class="form-control">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="Contraseña es requerida"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Repita su Contraseña</label>
+                                <dx-text-box mode="password" [(value)]="usuario.confirme" class="form-control">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="Confirmación es requerida"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
+                            <div class="form-group">
+                                <label>Departamento</label>
+                                <dx-select-box [items]="departamentos" displayExpr="de_nombre_dpto" valueExpr="de_id_departamento" [searchEnabled]="true" (onValueChanged)="cambiaDepartamento($event)" placeholder="Seleccione...">
+                                    <dxi-validation-rule type="required" message="Departamento es requerido es requerida"></dxi-validation-rule>
+                                </dx-select-box>
+                            </div>
                         </div>
+                        <dx-button icon="remove" style="margin-left: 10px; display: right" type="danger" [disabled]="guardando" text="Cancelar" (click)="cancelar()"></dx-button>
+                        <dx-button icon="check" style="margin-left: 10px; display: right" type="success" [useSubmitBehavior]="true" [disabled]="guardando" text="Guardar"></dx-button>
                     </div>
                 </form>
             </div>

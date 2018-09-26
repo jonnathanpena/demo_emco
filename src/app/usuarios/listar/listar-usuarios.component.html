@@ -1,1 +1,50 @@
-listar usuarios
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <dx-data-grid [dataSource]="usuarios" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true">
+
+                    <dxo-paging [pageSize]="10"></dxo-paging>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]" infoText="Page #{0}. Total: {1} ({2} usuarios)"></dxo-pager>
+                    <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true" placeholder="Buscar"></dxo-search-panel>
+                    <dxo-group-panel [visible]="true" laceholder="Arrastre una columna para agrupar"></dxo-group-panel>
+                    <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+
+                    <dxi-column dataField="de_nombre_per" caption="Nombre"></dxi-column>
+                    <dxi-column dataField="de_apellido_per" caption="Apellido"></dxi-column>
+                    <!--<dxi-column caption="Discount %" dataField="Discount" cellTemplate="discountCellTemplate" dataType="number" format="percent" alignment="right" [allowGrouping]="false" cssClass="bullet"></dxi-column>-->
+                    <dxi-column dataField="de_celular_per" caption="Celular"></dxi-column>
+                    <dxi-column dataField="de_usuario" caption="Usuario"></dxi-column>
+                    <!--<dxi-column dataField="Region" dataType="string"></dxi-column>
+                <dxi-column dataField="Sector" dataType="string"></dxi-column>
+                <dxi-column dataField="Channel" dataType="string"></dxi-column>
+                <dxi-column dataField="Customer" dataType="string" [width]="150"></dxi-column>-->
+
+                    <!--<div *dxTemplate="let d of 'discountCellTemplate'">
+                      <div class="chart-cell">
+                          <dx-bullet
+                              [showTarget]="false"
+                              [showZeroLevel]="true"
+                              [startScaleValue]="0"
+                              [endScaleValue]="100"
+                              [value]="d.value * 100">
+                              <dxo-size [width]="150" [height]="35"></dxo-size>
+                              <dxo-tooltip
+                                  [enabled]="true"
+                                  [paddingTopBottom]="2"
+                                  [customizeTooltip]="customizeTooltip">
+                                  <dxo-font [size]="18"></dxo-font>
+                              </dxo-tooltip>
+                              <dxo-margin
+                                  [top]="5"
+                                  [bottom]="0"
+                                  [left]="5"
+                              ></dxo-margin>
+                          </dx-bullet>
+                      </div>
+                  </div>-->
+                </dx-data-grid>
+            </div>
+        </div>
+    </div>
+</div>
