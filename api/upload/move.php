@@ -16,8 +16,10 @@ $archivo = $info[0]["archivo"];
 
 // Specifies the path to the file
 $path_to_file = "../documentos/".$archivo;
-$viejo_archivo = "./temp/".$archivo;
+$viejo_archivo = "temp/".$archivo;
 move_uploaded_file($viejo_archivo, $path_to_file);
 unlink($viejo_archivo);
+
+echo true;
 
 ?>

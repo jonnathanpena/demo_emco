@@ -74,6 +74,10 @@ export class CrearSolicitudComponent implements OnInit {
       de_estado_id: 1
     };
     this.now = new Date();
+    this.getMaxId();
+  }
+
+  getMaxId() {
     this.services.formularioIdMax().subscribe(response => {
       const data = response;
       let max = data.data[0].de_id_formulario * 1;
@@ -94,14 +98,47 @@ export class CrearSolicitudComponent implements OnInit {
     this.services.insertFormulario(this.formulario).subscribe(response => {
       if (response['_body'] === 'false' || response['_body'] === false) {
         notify('Algo sucedió mal, por favor verifique la información e intente nuevamente', 'error', 2000);
+        this.cancelar();
       } else {
-        this.insertDetalleForm1(response['_body']);
+        if (this.formulario.de_adjunto === 1) {
+          this.insertDetalleForm1(response['_body']);
+        } else {
+          notify('Solicitud generada exitosamente', 'success', 2000);
+          this.cancelar();
+        }
+      }
+    });
+  }
+
+  moveImage(id) {
+    console.log('nombre archivo', this.nombreArchivo);
+    this.services.moveImage(
+      {
+        archivo: this.nombreArchivo
+      }
+    ).subscribe(response => {
+      if (response['_body'] === true || response['_body'] === 'true') {
+        this.insertDetalleForm1(id);
+      } else {
+        notify('Algo sucedió mal, por favor verifique la información e intente nuevamente', 'error', 2000);
       }
     });
   }
 
   insertDetalleForm1(id) {
-
+    this.services.insertDetalleFormulario(
+      {
+        de_formulario_id: id,
+        de_ruta_adjunto: 'http://proconty.com/API/demo/documentos/' + this.nombreArchivo
+      })
+    .subscribe(response => {
+      if (response['_body'] === false || response['_body'] === 'false') {
+        notify('Algo sucedió mal, por favor verifique la información e intente nuevamente', 'error', 2000);
+      } else {
+        notify('Solicitud generada exitosamente', 'success', 2000);
+      }
+      this.cancelar();
+    });
   }
 
   guardarForm2(e) {
@@ -115,6 +152,7 @@ export class CrearSolicitudComponent implements OnInit {
     this.formulario.de_valor_solicitud = '';
     this.formulario.de_justificacion = '';
     this.formulario.de_adjunto = 0;
+    this.getMaxId();
   }
 
   uploaded(e) {

@@ -99,6 +99,10 @@ export class ULRProvider {
   public insertDetalleFormulario() {
     return this.dominio + 'detalleFormulario/insert.php';
   }
+
+  public moveImage() {
+    return this.dominio + 'upload/move.php';
+  }
   /* FIN DETALLE FORMULARIO */
 
 }

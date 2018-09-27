@@ -14,7 +14,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
    }
 
    // Specifies the path to the file
-   $path_to_file = "./temp/".$_FILES['file']['name'];
+   $path_to_file = "../documentos/".$_FILES['file']['name'];
 
    // Here, make sure that the file will be saved to the required directory.
    // Also, ensure that the client has not uploaded files with malicious content.
