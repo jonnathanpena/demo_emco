@@ -15,6 +15,7 @@ export class ListarSolicitudesComponent implements OnInit {
     admin: false,
     user: true
   };
+  interval: any;
 
   constructor(
     private router: Router,
@@ -45,11 +46,14 @@ export class ListarSolicitudesComponent implements OnInit {
   }
 
   getAllFormularios() {
-    this.services.allFormularios().subscribe(response => {
-      if (response.data.length > 0) {
-        this.solicitudes = response.data;
-      }
-    });
+    clearInterval(this.interval);
+    this.interval = setInterval(() => {
+      this.services.allFormularios().subscribe(response => {
+        if (response.data.length > 0) {
+          this.solicitudes = response.data;
+        }
+      });
+    }, 1000);
   }
 
   getMisSolicitudes(id_usuario) {
