@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="condiciones.form1">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -7,7 +7,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Usuario</label>
-                                <dx-text-box class="form-control" value="Jonnathan" [disabled]="true" [(value)]="usuario.nombre">
+                                <dx-text-box class="form-control" [disabled]="true" [(value)]="usuario.nombre">
                                 </dx-text-box>
                             </div>
                             <div class="form-group">
@@ -54,7 +54,7 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="condiciones.form2">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -63,17 +63,16 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Usuario</label>
-                                <dx-text-box class="form-control" value="Jonnathan" [disabled]="true">
+                                <dx-text-box class="form-control" [(value)]="usuario.nombre" [disabled]="true">
                                 </dx-text-box>
                             </div>
                             <div class="form-group">
                                 <label>Fecha</label>
-                                <dx-text-box class="form-control" value="26/9/2018" [disabled]="true">
-                                </dx-text-box>
+                                <dx-date-box [value]="now" type="date" [disabled]="true" style="width: 100%;"></dx-date-box>
                             </div>
                             <div class="form-group">
                                 <label>Transacción</label>
-                                <dx-text-box class="form-control" mask="VT-000">
+                                <dx-text-box class="form-control" [(value)]="formulario.de_transaccion" [disabled]="true">
                                     <dx-validator>
                                         <dxi-validation-rule type="required" message="Transacción es requerida"></dxi-validation-rule>
                                     </dx-validator>
@@ -83,7 +82,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label>Monto</label>
-                                <dx-text-box mode="number" class="form-control">
+                                <dx-text-box mode="number" class="form-control" [(value)]="formulario.de_valor_solicitud">
                                     <dx-validator>
                                         <dxi-validation-rule type="required" message="Monto de solicitud es requerida"></dxi-validation-rule>
                                     </dx-validator>
@@ -91,7 +90,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Motivo</label>
-                                <dx-text-box class="form-control">
+                                <dx-text-box class="form-control" [(value)]="formulario.de_justificacion">
                                     <dx-validator>
                                         <dxi-validation-rule type="required" message="Justificación es requerida"></dxi-validation-rule>
                                     </dx-validator>
@@ -99,7 +98,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Adjuntar archivo</label>
-                                <dx-file-uploader uploadUrl="http://proconty.com/API/demo/upload/upload.php" name="file" (onUploadError)="uploadError($event)" [multiple]="true" accept="*" [(value)]="imagenes" uploadMode="instantly"></dx-file-uploader>
+                                <dx-file-uploader uploadUrl="http://proconty.com/API/demo/upload/upload.php" name="file" (onUploaded)="uploaded($event)" (onUploadError)="uploadError($event)" [multiple]="false" accept="*" [(value)]="imagenes" uploadMode="instantly"></dx-file-uploader>
                             </div>
                         </div>
                         <dx-button icon="remove" style="margin-left: 10px; display: right" type="danger" [disabled]="guardando" text="Cancelar" (click)="cancelar()"></dx-button>
@@ -111,52 +110,23 @@
     </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="condiciones.form3">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <input type="file" (change)="handleFile($event)" />
+                <input type="file" (change)="handleFile($event)" style="margin-top: 10px;" />
                 <dx-data-grid [dataSource]="solicitudes" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true">
 
                     <dxo-paging [pageSize]="10"></dxo-paging>
                     <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]" infoText="Page #{0}. Total: {1} ({2} usuarios)"></dxo-pager>
                     <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
 
-                    <dxi-column dataField="de_id_usuario" caption="Usuario"></dxi-column>
-                    <dxi-column dataField="de_fecha_creacion" caption="Fecha"></dxi-column>
-                    <!--<dxi-column caption="Discount %" dataField="Discount" cellTemplate="discountCellTemplate" dataType="number" format="percent" alignment="right" [allowGrouping]="false" cssClass="bullet"></dxi-column>-->
-                    <dxi-column dataField="de_transaccion" caption="Transacción"></dxi-column>
-                    <dxi-column dataField="de_valor_solicitud" caption="Monto"></dxi-column>
-                    <dxi-column dataField="de_justificacion" caption="Justificación/Motivo"></dxi-column>
-                    <!--<dxi-column dataField="Region" dataType="string"></dxi-column>
-                <dxi-column dataField="Sector" dataType="string"></dxi-column>
-                <dxi-column dataField="Channel" dataType="string"></dxi-column>
-                <dxi-column dataField="Customer" dataType="string" [width]="150"></dxi-column>-->
-
-                    <!--<div *dxTemplate="let d of 'discountCellTemplate'">
-                      <div class="chart-cell">
-                          <dx-bullet
-                              [showTarget]="false"
-                              [showZeroLevel]="true"
-                              [startScaleValue]="0"
-                              [endScaleValue]="100"
-                              [value]="d.value * 100">
-                              <dxo-size [width]="150" [height]="35"></dxo-size>
-                              <dxo-tooltip
-                                  [enabled]="true"
-                                  [paddingTopBottom]="2"
-                                  [customizeTooltip]="customizeTooltip">
-                                  <dxo-font [size]="18"></dxo-font>
-                              </dxo-tooltip>
-                              <dxo-margin
-                                  [top]="5"
-                                  [bottom]="0"
-                                  [left]="5"
-                              ></dxo-margin>
-                          </dx-bullet>
-                      </div>
-                  </div>-->
+                    <dxi-column dataField="Fecha" caption="Fecha" dataType="date"></dxi-column>
+                    <dxi-column dataField="Monto" caption="Monto"></dxi-column>
+                    <dxi-column dataField="Motivo" caption="Justificación/Motivo"></dxi-column>
                 </dx-data-grid>
+                <dx-button icon="remove" style="margin-left: 10px; display: right; margin-top: 10px;" type="danger" text="Cancelar" (click)="salir()"></dx-button>
+                <dx-button icon="check" style="margin-left: 10px; display: right; margin-top: 10px;" type="success" [disabled]="guardando" text="Guardar" (click)="guardarForm3()"></dx-button>
             </div>
         </div>
     </div>

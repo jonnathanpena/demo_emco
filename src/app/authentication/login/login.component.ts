@@ -27,6 +27,40 @@ export class LoginComponent implements OnInit, AfterViewInit {
         clave: ''
       };
       this.ingresando = false;
+      localStorage.setItem('demo_emco_user', '');
+      const menu = [
+        {
+          path: '/inicio',
+          title: 'Dashboards',
+          icon: 'mdi mdi-gauge',
+          class: '',
+          extralink: false,
+          submenu: []
+        },
+        {
+          path: '',
+          title: 'Usuarios',
+          icon: 'mdi mdi-account-multiple',
+          class: 'has-arrow',
+          extralink: false,
+          submenu: [
+              { path: '/usuarios/crear', title: 'Nuevo', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+              { path: '/usuarios', title: 'Usuarios', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+          ]
+        },
+        {
+          path: '',
+          title: 'Solicitudes',
+          icon: 'mdi mdi-equal-box',
+          class: 'has-arrow',
+          extralink: false,
+          submenu: [
+              { path: '/solicitudes/crear', title: 'Nueva', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+              { path: '/solicitudes', title: 'Solicitudes', icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: [] },
+          ]
+        }
+      ];
+      localStorage.setItem('demo_emco_menu', JSON.stringify(menu));
     }
 
     ngAfterViewInit() {
@@ -49,10 +83,88 @@ export class LoginComponent implements OnInit, AfterViewInit {
     ingresar(e) {
       e.preventDefault();
       this.services.ingresar({de_usuario: this.usuario.usuario}).subscribe(response => {
+        console.log('ingresar', response);
         const usuario = JSON.parse(response['_body']);
         if (usuario.data.length > 0) {
           if (usuario.data[0].de_clave === this.usuario.clave) {
-            this.insertLogLogin(usuario.data[0].de_user_id);
+            if (usuario.data[0].de_id_user_dpto === null) {
+              localStorage.setItem('demo_emco_menu', JSON.stringify(
+                [
+                  {
+                    path: '/inicio',
+                    title: 'Dashboards',
+                    icon: 'mdi mdi-gauge',
+                    class: '',
+                    extralink: false,
+                    submenu: []
+                  },
+                  {
+                    path: '',
+                    title: 'Usuarios',
+                    icon: 'mdi mdi-account-multiple',
+                    class: 'has-arrow',
+                    extralink: false,
+                    submenu: [
+                        {
+                          path: '/usuarios/crear',
+                          title: 'Nuevo', icon: '',
+                          class: '', label: '', labelClass: '', extralink: false, submenu: []
+                        },
+                        {
+                          path: '/usuarios',
+                          title: 'Usuarios',
+                          icon: '', class: '', label: '', labelClass: '', extralink: false, submenu: []
+                        },
+                    ]
+                  },
+                  {
+                    path: '',
+                    title: 'Solicitudes',
+                    icon: 'mdi mdi-equal-box',
+                    class: 'has-arrow',
+                    extralink: false,
+                    submenu: [
+                        {
+                          path: '/solicitudes/crear',
+                          title: 'Nueva', icon: '', class: '',
+                          label: '', labelClass: '', extralink: false, submenu: []
+                        },
+                        {
+                          path: '/solicitudes', title: 'Solicitudes', icon: '',
+                          class: '', label: '', labelClass: '', extralink: false, submenu: []
+                        },
+                    ]
+                  }
+                ]
+              ));
+              usuario.isLoggedin = true;
+              localStorage.setItem('demo_emco_user', JSON.stringify(usuario.data[0]));
+              this.router.navigate(['/dashboard/dashboard1']);
+            } else {
+              localStorage.setItem('demo_emco_menu', JSON.stringify(
+                [
+                  {
+                    path: '',
+                    title: 'Solicitudes',
+                    icon: 'mdi mdi-equal-box',
+                    class: 'has-arrow',
+                    extralink: false,
+                    submenu: [
+                        {
+                          path: '/solicitudes/crear',
+                          title: 'Nueva', icon: '', class: '',
+                          label: '', labelClass: '', extralink: false, submenu: []
+                        },
+                        {
+                          path: '/solicitudes', title: 'Solicitudes', icon: '',
+                          class: '', label: '', labelClass: '', extralink: false, submenu: []
+                        },
+                    ]
+                  }
+                ]
+              ));
+              this.insertLogLogin(usuario.data[0].de_user_id, usuario.data[0]);
+            }
           } else {
             notify('Clave incorrecta, por favor, intente nuevamente', 'error', 2000);
             this.usuario = {
@@ -66,7 +178,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
       });
     }
 
-    insertLogLogin(id) {
+    insertLogLogin(id, usuario) {
       this.services.insertLogLogin(
         {
           de_usuario_log: id,
@@ -76,7 +188,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
         if (response['_body'] === 'false' || response['_body'] === false) {
           notify('Verifique su conexión a internet e intente nuevamente', 'error', 2000);
         } else {
-          notify('Puedes ingresar', 'success', 2000);
+          usuario.isLoggedin = true;
+          localStorage.setItem('demo_emco_user', JSON.stringify(usuario));
+          this.router.navigate(['/dashboard/dashboard1']);
         }
       });
     }

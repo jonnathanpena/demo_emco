@@ -1,5 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import notify from 'devextreme/ui/notify';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 import { XlsxToJsonService } from '../xlsx-to-json-service';
 import { SolicitudesProvider } from '../solicitudes.providers';
@@ -20,7 +22,6 @@ export class CrearSolicitudComponent implements OnInit {
   nombreArchivo = '';
   solicitudes: any = [];
   private xlsxToJsonService: XlsxToJsonService = new XlsxToJsonService();
-  excel: any;
   formulario: any = {
     de_id_usuario: 3,
     de_fecha_creacion: '2018-09-26 17:30:00',
@@ -35,59 +36,85 @@ export class CrearSolicitudComponent implements OnInit {
     nombre: 'Jonnathanpena'
   };
   now: Date = new Date();
+  excel: any = [];
 
   constructor(
-    private services: SolicitudesProvider
+    private services: SolicitudesProvider,
+    private router: Router,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit() {
-
-    this.condiciones = {
-      form1: true,
-      form2: false,
-      form3: false
-    };
-    this.guardando = false;
-    this.imagenes = [];
-    this.solicitudes = [];
-    this.solicitudes = [
-      {
-        de_id_usuario: 1,
-        de_fecha_creacion: '2018-09-26 17:00:00',
-        de_transaccion: 'TI-001',
-        de_valor_solicitud: '200.65',
-        de_justificacion: 'Justificación'
+    if (localStorage.getItem('demo_emco_user') === '') {
+      this.router.navigate(['/authentication/login']);
+    } else {
+      this.excel = [];
+      this.condiciones = {
+        form1: true,
+        form2: false,
+        form3: false
+      };
+      this.guardando = false;
+      this.imagenes = [];
+      this.solicitudes = [];
+      const usuario = JSON.parse(localStorage.getItem('demo_emco_user'));
+      if (usuario.de_nombre_dpto === 'TI') {
+        this.condiciones = {
+          form1: true,
+          form2: false,
+          form3: false
+        };
+      } else if (usuario.de_nombre_dpto === 'FINANZAS') {
+        this.condiciones = {
+          form1: false,
+          form2: true,
+          form3: false
+        };
+      } else if (usuario.de_nombre_dpto === 'TALENTO HUMANO') {
+        this.condiciones = {
+          form1: false,
+          form2: false,
+          form3: true
+        };
       }
-    ];
-    this.excel = [];
-    this.usuario = {
-      id: 3,
-      nombre: 'Jonnathanpena'
-    };
-    this.formulario = {
-      de_id_usuario: 3,
-      de_fecha_creacion: this.now,
-      de_transaccion: '',
-      de_valor_solicitud: '',
-      de_justificacion: '',
-      de_adjunto: 0,
-      de_estado_id: 1
-    };
-    this.now = new Date();
-    this.getMaxId();
+      this.usuario = {
+        id: usuario.de_id_user,
+        nombre: usuario.de_usuario
+      };
+      this.formulario = {
+        de_id_usuario: this.usuario.id,
+        de_fecha_creacion: this.now,
+        de_transaccion: '',
+        de_valor_solicitud: '',
+        de_justificacion: '',
+        de_adjunto: 0,
+        de_estado_id: 1
+      };
+      this.now = new Date();
+      this.getMaxId();
+    }
   }
 
   getMaxId() {
+    const usuario = JSON.parse(localStorage.getItem('demo_emco_user'));
+    let departamento;
+    if (usuario.de_nombre_dpto === 'TI') {
+      departamento = 'TI';
+    } else if (usuario.de_nombre_dpto === 'FINANZAS') {
+      departamento = 'FIN';
+    } else if (usuario.de_nombre_dpto === 'TALENTO HUMANO') {
+      departamento = 'TH';
+    }
     this.services.formularioIdMax().subscribe(response => {
       const data = response;
       let max = data.data[0].de_id_formulario * 1;
       max = max + 1;
       if (max > 0 && max < 10) {
-        this.formulario.de_transaccion = 'TI-00' + max;
+        this.formulario.de_transaccion = departamento + '-00' + max;
       } else if (max > 9 && max < 100) {
-        this.formulario.de_transaccion = 'TI-0' + max;
+        this.formulario.de_transaccion = departamento + '-0' + max;
       } else if (max > 99) {
-        this.formulario.de_transaccion = 'TI-' + max;
+        this.formulario.de_transaccion = departamento + '-' + max;
       }
     });
   }
@@ -95,6 +122,7 @@ export class CrearSolicitudComponent implements OnInit {
   guardarForm1(e) {
     e.preventDefault();
     this.formulario.de_estado_id = 1;
+    this.guardando = true;
     this.services.insertFormulario(this.formulario).subscribe(response => {
       if (response['_body'] === 'false' || response['_body'] === false) {
         notify('Algo sucedió mal, por favor verifique la información e intente nuevamente', 'error', 2000);
@@ -143,6 +171,81 @@ export class CrearSolicitudComponent implements OnInit {
 
   guardarForm2(e) {
     e.preventDefault();
+    this.guardando = true;
+    this.formulario.de_estado_id = 2;
+    this.services.insertFormulario(this.formulario).subscribe(response => {
+      if (response['_body'] === 'false' || response['_body'] === false) {
+        notify('Algo sucedió mal, por favor verifique la información e intente nuevamente', 'error', 2000);
+        this.cancelar();
+      } else {
+        if (this.formulario.de_adjunto === 1) {
+          this.insertDetalleForm1(response['_body']);
+        } else {
+          notify('Solicitud generada exitosamente', 'success', 2000);
+          this.cancelar();
+        }
+      }
+    });
+  }
+
+  guardarForm3() {
+    this.guardando = true;
+    this.services.insertFormularioAll({solicitudes: this.excel}).subscribe(response => {
+      if (response['_body'] === 'true') {
+        notify('Guardado exitoso', 'success', 2000);
+      } else {
+        notify('Compruebe su conexión a internet e intente nuevamente', 'error', 2000);
+      }
+      setTimeout(() => {
+        this.salir();
+      }, 4000);
+    });
+  }
+
+  salir() {
+    this.router.navigate(['/solicitudes']);
+  }
+
+  getIdMax(form) {
+    const usuario = JSON.parse(localStorage.getItem('demo_emco_user'));
+    let departamento;
+    const date = new Date(form.Fecha);
+    const fecha = this.datePipe.transform(date, 'yyyy-MM-dd H:m:s');
+    if (usuario.de_nombre_dpto === 'TI') {
+      departamento = 'TI';
+    } else if (usuario.de_nombre_dpto === 'FINANZAS') {
+      departamento = 'FIN';
+    } else if (usuario.de_nombre_dpto === 'TALENTO HUMANO') {
+      departamento = 'TH';
+    }
+    this.services.formularioIdMax().subscribe(response => {
+      const data = response;
+      let max = data.data[0].de_id_formulario * 1;
+      max = max + 1;
+      if (max > 0 && max < 10) {
+        form.de_transaccion = departamento + '-00' + max;
+      } else if (max > 9 && max < 100) {
+        form.de_transaccion = departamento + '-0' + max;
+      } else if (max > 99) {
+        form.de_transaccion = departamento + '-' + max;
+      }
+      this.excel.push(
+        {
+          de_id_usuario: this.usuario.id,
+          de_fecha_creacion: fecha,
+          de_transaccion: form.de_transaccion,
+          de_valor_solicitud: form.Monto,
+          de_justificacion: form.Motivo,
+          de_adjunto: 0,
+          de_estado_id: 1
+        }
+      );
+      console.log('excel', this.excel);
+    });
+  }
+
+  insertarFormulario(form) {
+    this.services.insertFormulario(form).subscribe(response => {});
   }
 
   cancelar() {
@@ -153,6 +256,7 @@ export class CrearSolicitudComponent implements OnInit {
     this.formulario.de_justificacion = '';
     this.formulario.de_adjunto = 0;
     this.getMaxId();
+    this.solicitudes = [];
   }
 
   uploaded(e) {
@@ -167,10 +271,13 @@ export class CrearSolicitudComponent implements OnInit {
   }
 
   handleFile(event) {
+    this.excel = [];
     const file = event.target.files[0];
     this.xlsxToJsonService.processFileToJson({}, file).subscribe(data => {
-      this.excel = data.sheets.Hoja1;
-      console.log('excel', this.excel);
+      this.solicitudes = data.sheets.Hoja1;
+      for (let i = 0; i < this.solicitudes.length; i++) {
+        this.getIdMax(this.solicitudes[i]);
+      }
     });
   }
 }

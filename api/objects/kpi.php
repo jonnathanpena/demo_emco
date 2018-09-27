@@ -67,7 +67,7 @@ class Kpi {
                     LEFT JOIN  `de_departamento` dpto ON (dpto.de_id_departamento = ud.de_dpto_id) 
                     LEFT JOIN `de_cantones` as can ON (per.`de_canton_per` = can.id_intcant)
                     WHERE fm.`de_fecha_creacion` BETWEEN NOW() - INTERVAL 30 DAY AND NOW()
-                    group by edo.`de_nombre_estado`, can.`nombre_intcant`";
+                    group by  dpto.`de_nombre_dpto`,  can.`nombre_intcant`";
                 
         // prepare query statement
         $stmt = $this->conn->prepare($query);

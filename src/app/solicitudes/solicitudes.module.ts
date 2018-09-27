@@ -10,6 +10,7 @@ import { ListarSolicitudesComponent } from './listar/listar-solicitudes.componen
 import { ULRProvider } from '../providers/url.providers';
 import { SolicitudesProvider } from './solicitudes.providers';
 import { XlsxToJsonService } from './xlsx-to-json-service';
+import { DatePipe } from '@angular/common';
 
 import {
   DxTextBoxModule,
@@ -47,7 +48,8 @@ import {
   providers: [
     ULRProvider,
     SolicitudesProvider,
-    XlsxToJsonService
+    XlsxToJsonService,
+    DatePipe
   ]
 })
 

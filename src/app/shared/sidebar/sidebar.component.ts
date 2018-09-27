@@ -7,11 +7,11 @@ declare var $: any;
 @Component({
   selector: 'ap-sidebar',
   templateUrl: './sidebar.component.html'
-  
+
 })
 export class SidebarComponent implements OnInit {
-    
-    
+    usuario: any;
+
     showMenu: string = '';
     showSubMenu: string = '';
     public sidebarnavItems: any[];
@@ -19,33 +19,39 @@ export class SidebarComponent implements OnInit {
     addExpandClass(element: any) {
         if (element === this.showMenu) {
             this.showMenu = '0';
-            
+
         } else {
-            this.showMenu = element; 
+            this.showMenu = element;
         }
     }
     addActiveClass(element: any) {
         if (element === this.showSubMenu) {
             this.showSubMenu = '0';
-            
+
         } else {
-            this.showSubMenu = element; 
+            this.showSubMenu = element;
         }
     }
-    
+
     constructor(private modalService: NgbModal, private router: Router,
         private route: ActivatedRoute) {
-        
-    } 
+
+    }
     // End open close
     ngOnInit() {
+        if (localStorage.getItem('demo_emco_user') === '' || localStorage.getItem('demo_emco_user') === null || localStorage.getItem('demo_emco_user') === undefined) {
+          this.router.navigate(['/authentication/login']);
+        } else {
+          this.usuario = JSON.parse(localStorage.getItem('demo_emco_user'));
+          console.log('usuario', this.usuario);
+        }
         this.sidebarnavItems = ROUTES.filter(sidebarnavItem => sidebarnavItem);
         $(function () {
             $(".sidebartoggler").on('click', function() {
                 if ($("#main-wrapper").hasClass("mini-sidebar")) {
                     $("body").trigger("resize");
                     $("#main-wrapper").removeClass("mini-sidebar");
-                     
+
                 } else {
                     $("body").trigger("resize");
                     $("#main-wrapper").addClass("mini-sidebar");
@@ -53,6 +59,11 @@ export class SidebarComponent implements OnInit {
             });
 
         });
-        
+
+    }
+
+    logOut() {
+      localStorage.setItem('demo_emco_user', '');
+      this.router.navigate(['/authentication/login']);
     }
 }

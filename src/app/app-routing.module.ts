@@ -36,8 +36,9 @@ export const routes: Routes = [
 },
 {
     path: '**',
-    redirectTo: '404'
-}];
+    redirectTo: './authentication/authentication.module#AuthenticationModule'
+}
+];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes), NgbModule.forRoot()],

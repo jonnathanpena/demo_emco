@@ -1,7 +1,7 @@
 <!-- User profile -->
 <div class="user-profile">
     <!-- User profile image -->
-    <div class="profile-img"> <img src="assets/images/users/profile.png" alt="user" />
+    <div class="profile-img"> <img src="assets/images/sanhur.jpeg" alt="user" />
         <!-- this is blinking heartbit-->
         <div class="notify setpos">
             <span class="heartbit"></span>
@@ -10,21 +10,11 @@
     </div>
     <!-- User profile text-->
     <div class="profile-text">
-        <h5>Markarn Doe</h5>
-        <a ngbDropdownToggle ngbDropdown href="javascript:void(0)" class="u-dropdown"><i class="mdi mdi-settings"></i>
-            <div class="dropdown-menu animated flipInY" ngbDropdownMenu>
-                <a href="#" class="dropdown-item"><i class="ti-user"></i> My Profile</a>
-        <a href="#" class="dropdown-item"><i class="ti-wallet"></i> My Balance</a>
-        <a href="#" class="dropdown-item"><i class="ti-email"></i> Inbox</a>
-        <div class="dropdown-divider"></div>
-        <a href="#" class="dropdown-item"><i class="ti-settings"></i> Account Setting</a>
-        <div class="dropdown-divider"></div>
-        <a href="login.html" class="dropdown-item"><i class="fa fa-power-off"></i> Logout</a>
+        <h5>{{ usuario.de_usuario }}</h5>
+        <h6>{{ usuario.nombre_intcant }}</h6>
+        <h6>{{ usuario.de_nombre_dpto }}</h6>
+        <a routerLink="/authentication/login" class="" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
     </div>
-    </a>
-    <a href="#" class="" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
-    <a href="#" class="" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
-</div>
 </div>
 <!-- End User profile text-->
 <hr>
