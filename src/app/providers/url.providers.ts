@@ -105,4 +105,14 @@ export class ULRProvider {
   }
   /* FIN DETALLE FORMULARIO */
 
+  /* LOGIN     */
+  public ingresar() {
+    return this.dominio + 'login/getByUser.php';
+  }
+
+  public insertLogLogin() {
+    return this.dominio + 'logLogin/insert.php';
+  }
+  /* FIN LOGIN */
+
 }

@@ -11,11 +11,25 @@ import { Signup2Component } from './signup2/signup2.component';
 
 import { AuthenticationRoutes } from './authentication.routing';
 
+import { AuthenticationProvider } from './authentication.providers';
+import { ULRProvider } from '../providers/url.providers';
+
+import {
+  DxTextBoxModule,
+  DxValidatorModule,
+  DxValidationSummaryModule,
+  DxButtonModule
+} from 'devextreme-angular';
+
 
 @NgModule({
-  imports: [ 
+  imports: [
     CommonModule,
-    RouterModule.forChild(AuthenticationRoutes)
+    RouterModule.forChild(AuthenticationRoutes),
+    DxTextBoxModule,
+    DxValidatorModule,
+    DxValidationSummaryModule,
+    DxButtonModule
   ],
   declarations: [
     NotFoundComponent,
@@ -24,6 +38,10 @@ import { AuthenticationRoutes } from './authentication.routing';
     LockComponent,
     Login2Component,
     Signup2Component
+  ],
+  providers: [
+    AuthenticationProvider,
+    ULRProvider
   ]
 })
 
