@@ -20,7 +20,7 @@
                         <div class="col-12">
                             <h2 class="m-b-0"><i class="mdi mdi-briefcase-check text-success"></i></h2>
                             <h3 class="">${{ totales.aprobados }}</h3>
-                            <h6 class="card-subtitle">Aprobador</h6>
+                            <h6 class="card-subtitle">Aprobados</h6>
                         </div>
                     </div>
                 </div>
@@ -85,7 +85,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <dx-chart id="chart" title="Formularios por Cantones" [dataSource]="grossProductData" (onPointClick)="onPointClick($event)">
+                <dx-chart id="chart" title="Formularios por Ciudades" [dataSource]="grossProductData" (onPointClick)="onPointClick($event)">
                     <dxi-series valueField="aprobado" name="Aprobado"></dxi-series>
                     <dxi-series valueField="pendiente" name="Pendiente"></dxi-series>
                     <dxi-series valueField="rechazado" name="Rechazado"></dxi-series>
@@ -99,29 +99,6 @@
                     <dxo-legend verticalAlignment="bottom" horizontalAlignment="center">
                     </dxo-legend>
                     <dxo-export [enabled]="true"></dxo-export>
-                </dx-chart>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="row">
-    <div class="col-12">
-        <div class="card">
-            <div class="card-body">
-                <dx-chart id="chart" title="Formularios por Cantones" [dataSource]="maleAgeData">
-                    <dxi-series valueField="aprobado" name="Aprobado"></dxi-series>
-                    <dxi-series valueField="pendiente" name="Pendiente"></dxi-series>
-                    <dxi-series valueField="rechazado" name="Rechazado"></dxi-series>
-                    <dxi-value-axis position="right">
-                        <dxo-title text="cantidad"></dxo-title>
-                    </dxi-value-axis>
-                    <dxo-common-series-settings argumentField="nombre_intcant" type="stackedBar">
-                    </dxo-common-series-settings>
-                    <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="top">
-                    </dxo-legend>
-                    <dxo-export [enabled]="true"></dxo-export>
-                    <dxo-tooltip [enabled]="true" location="edge" [customizeTooltip]="customizeTooltip">
-                    </dxo-tooltip>
                 </dx-chart>
             </div>
         </div>
