@@ -8,16 +8,6 @@ import { BlankComponent } from './layouts/blank/blank.component';
 export const routes: Routes = [
 {
     path: '',
-    component: BlankComponent,
-    children: [
-        {
-            path: 'authentication',
-            loadChildren: './authentication/authentication.module#AuthenticationModule'
-        }
-    ]
-},
-{
-    path: '',
     component: FullComponent,
     children: [
         { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
@@ -33,6 +23,16 @@ export const routes: Routes = [
         { path: 'usuarios', loadChildren: './usuarios/usarios.module#UsuariosModule'},
         { path: 'solicitudes', loadChildren: './solicitudes/solicitudes.module#SolicitudesModule'}
     ]
+},
+{
+  path: '',
+  component: BlankComponent,
+  children: [
+      {
+          path: 'authentication',
+          loadChildren: './authentication/authentication.module#AuthenticationModule'
+      }
+  ]
 },
 {
     path: '**',
