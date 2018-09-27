@@ -205,40 +205,44 @@ export class CrearSolicitudComponent implements OnInit {
   }
 
   guardarForm3() {
-    this.guardando = true;
-    this.services.insertFormularioAll({solicitudes: this.excel}).subscribe(response => {
-      if (response['_body'] === 'true') {
-        notify('Guardado exitoso', 'success', 2000);
-      } else {
-        notify('Compruebe su conexión a internet e intente nuevamente', 'error', 2000);
-      }
-      const usuario = JSON.parse(localStorage.getItem('demo_emco_user'));
-      let total = 0;
-      for (let i = 0; i < this.excel.length; i++) {
-        total += this.excel[i].de_valor_solicitud * 1;
-      }
-      this.services.sendMail(
-        {
-          usuario: usuario.de_usuario,
-          valor_solicitud: total,
-          justificacion: this.excel[0].de_justificacion,
-          transaccion: 'Múltiples',
-          fecha: this.now
+    if(this.solicitudes.length > 0){    
+      this.guardando = true;
+      this.services.insertFormularioAll({solicitudes: this.excel}).subscribe(response => {
+        if (response['_body'] === 'true') {
+          notify('Guardado exitoso', 'success', 2000);
+        } else {
+          notify('Compruebe su conexión a internet e intente nuevamente', 'error', 2000);
         }
-      ).subscribe(response => {
-        console.log('response mail', response);
+        const usuario = JSON.parse(localStorage.getItem('demo_emco_user'));
+        let total = 0;
+        for (let i = 0; i < this.excel.length; i++) {
+          total += this.excel[i].de_valor_solicitud * 1;
+        }
+        this.services.sendMail(
+          {
+            usuario: usuario.de_usuario,
+            valor_solicitud: total,
+            justificacion: this.excel[0].de_justificacion,
+            transaccion: 'Múltiples',
+            fecha: this.now
+          }
+        ).subscribe(response => {
+          console.log('response mail', response);
+        });
+        setTimeout(() => {
+          this.salir();
+        }, 4000);
       });
-      setTimeout(() => {
-        this.salir();
-      }, 4000);
-    });
+    } else {
+      notify('Error no hay datos, intente de nuevo', 'error', 2000);        
+    }
   }
 
   salir() {
     this.router.navigate(['/solicitudes']);
   }
 
-  getIdMax(form) {
+  getIdMax(form, posicion) {
     const usuario = JSON.parse(localStorage.getItem('demo_emco_user'));
     let departamento;
     const date = new Date(form.Fecha);
@@ -253,7 +257,7 @@ export class CrearSolicitudComponent implements OnInit {
     this.services.formularioIdMax().subscribe(response => {
       const data = response;
       let max = data.data[0].de_id_formulario * 1;
-      max = max + 1;
+      max = max + 1 + posicion;
       if (max > 0 && max < 10) {
         form.de_transaccion = departamento + '-00' + max;
       } else if (max > 9 && max < 100) {
@@ -307,9 +311,13 @@ export class CrearSolicitudComponent implements OnInit {
     const file = event.target.files[0];
     this.xlsxToJsonService.processFileToJson({}, file).subscribe(data => {
       this.solicitudes = data.sheets.Hoja1;
-      for (let i = 0; i < this.solicitudes.length; i++) {
-        this.getIdMax(this.solicitudes[i]);
-      }
+      if (this.solicitudes[0].Monto || this.solicitudes[0].Fecha || this.solicitudes[0].Motivo) {
+        for (let i = 0; i < this.solicitudes.length; i++) {
+          this.getIdMax(this.solicitudes[i], i);
+        }
+      } else {
+        notify('Error en el formato, intente de nuevo', 'error', 2000);
+      }      
     });
   }
 }
