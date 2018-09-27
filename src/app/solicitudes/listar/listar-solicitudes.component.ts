@@ -122,4 +122,14 @@ export class ListarSolicitudesComponent implements OnInit {
       console.log('response aprobador', response);
     });
   }
+
+  download(data) {
+    this.services.detalleByFormulario({de_formulario_id: data.data.de_id_formulario}).subscribe(
+      response => {
+        const documentos = JSON.parse(response['_body']);
+        const documento = documentos.data[0].de_ruta_adjunto;
+        window.open(documento);
+      }
+    );
+  }
 }

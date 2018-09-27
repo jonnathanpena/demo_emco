@@ -34,6 +34,13 @@ export class  SolicitudesProvider {
       .map((res: Response) => res);
   }
 
+  public detalleByFormulario(objeto: any) {
+    return this.http.post(this.urlProvider.getDetalleFormulario(), JSON.stringify(objeto), {
+      headers: new Headers({'Content-Type': 'application/json'})
+    })
+      .map((res: Response) => res);
+  }
+
   public insertFormulario(objeto: any) {
     return this.http.post(this.urlProvider.insertFormulario(), JSON.stringify(objeto), {
       headers: new Headers({'Content-Type': 'application/json'})

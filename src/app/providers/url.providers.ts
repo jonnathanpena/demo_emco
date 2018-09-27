@@ -111,6 +111,10 @@ export class ULRProvider {
   public moveImage() {
     return this.dominio + 'upload/move.php';
   }
+
+  public getDetalleFormulario() {
+    return this.dominio + 'detalleFormulario/getById.php';
+  }
   /* FIN DETALLE FORMULARIO */
 
   /* LOGIN     */

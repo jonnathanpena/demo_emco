@@ -30,6 +30,11 @@
                             <button class="btn btn-success btn-sm" (click)="aprobar(estado)">Aprobar</button>
                             <button class="btn btn-danger btn-sm" (click)="rechazar(estado)">Rechazar</button>
                         </div>
+                        <div *ngIf="estado.data.de_adjunto === '1'">
+                            <button class="btn btn-info btn-sm" (click)="download(estado)">
+                              <i class="mdi mdi-download"></i>
+                            </button>
+                        </div>
                     </div>
 
 

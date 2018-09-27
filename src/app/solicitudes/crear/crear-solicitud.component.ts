@@ -205,7 +205,7 @@ export class CrearSolicitudComponent implements OnInit {
   }
 
   guardarForm3() {
-    if(this.solicitudes.length > 0){    
+    if(this.solicitudes.length > 0){
       this.guardando = true;
       this.services.insertFormularioAll({solicitudes: this.excel}).subscribe(response => {
         if (response['_body'] === 'true') {
@@ -234,7 +234,7 @@ export class CrearSolicitudComponent implements OnInit {
         }, 4000);
       });
     } else {
-      notify('Error no hay datos, intente de nuevo', 'error', 2000);        
+      notify('Error no hay datos, intente de nuevo', 'error', 2000);
     }
   }
 
@@ -317,7 +317,7 @@ export class CrearSolicitudComponent implements OnInit {
         }
       } else {
         notify('Error en el formato, intente de nuevo', 'error', 2000);
-      }      
+      }
     });
   }
 }
