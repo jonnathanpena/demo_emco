@@ -9,6 +9,8 @@
                     <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
                     <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true" placeholder="Buscar"></dxo-search-panel>
                     <dxo-group-panel [visible]="true"></dxo-group-panel>
+                    <dxo-export [enabled]="true" fileName="solicitudes" [allowExportSelectedData]="true"></dxo-export>
+                    <dxo-selection mode="multiple"></dxo-selection>
 
                     <dxi-column dataField="de_transaccion" caption="Código" [width]="100"></dxi-column>
                     <dxi-column dataField="de_fecha_creacion" caption="Fecha" dataType="date" [width]="100"></dxi-column>
