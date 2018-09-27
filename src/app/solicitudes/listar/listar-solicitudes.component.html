@@ -1,0 +1,67 @@
+<div class="row" *ngIf="views.admin">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <dx-data-grid [dataSource]="solicitudes" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true">
+
+                    <dxo-paging [pageSize]="10"></dxo-paging>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
+                    <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+                    <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true" placeholder="Buscar"></dxo-search-panel>
+                    <dxo-group-panel [visible]="true"></dxo-group-panel>
+
+                    <dxi-column dataField="de_transaccion" caption="Código" [width]="100"></dxi-column>
+                    <dxi-column dataField="de_fecha_creacion" caption="Fecha" dataType="date" [width]="100"></dxi-column>
+                    <dxi-column dataField="de_valor_solicitud" caption="Monto ($)" [width]="100" format="currency"></dxi-column>
+                    <dxi-column dataField="de_justificacion" caption="Justificación/Motivo"></dxi-column>
+                    <dxi-column dataField="de_estado_id" caption="Estado" cellTemplate="estadoCellTemplate" [width]="150"></dxi-column>
+                    <dxi-column dataField="de_estado_id" caption="Acción" cellTemplate="aprobacionCellTemplate" [width]="150"></dxi-column>
+
+                    <div *dxTemplate="let estado of 'estadoCellTemplate'">
+                        <span class="label label-inverse" *ngIf="estado.value === '1'">Pendiente Aprobar</span>
+                        <span class="label label-success" *ngIf="estado.value === '2'">Aprobado</span>
+                        <span class="label label-danger" *ngIf="estado.value === '3'">Rechazada</span>
+                    </div>
+
+                    <div *dxTemplate="let estado of 'aprobacionCellTemplate'">
+                        <div *ngIf="estado.value === '1'">
+                            <button class="btn btn-success btn-sm" (click)="aprobar(estado)">Aprobar</button>
+                            <button class="btn btn-danger btn-sm" (click)="rechazar(estado)">Rechazar</button>
+                        </div>
+                    </div>
+
+
+                </dx-data-grid>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="views.user">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <dx-data-grid [dataSource]="formularios" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true">
+
+                    <dxo-paging [pageSize]="10"></dxo-paging>
+                    <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
+                    <dxo-grouping [autoExpandAll]="false"></dxo-grouping>
+                    <dxo-search-panel [visible]="true" [highlightCaseSensitive]="true" placeholder="Buscar"></dxo-search-panel>
+                    <dxo-group-panel [visible]="true"></dxo-group-panel>
+
+                    <dxi-column dataField="de_transaccion" caption="Código" [width]="100"></dxi-column>
+                    <dxi-column dataField="de_fecha_creacion" caption="Fecha" dataType="date" [width]="100"></dxi-column>
+                    <dxi-column dataField="de_valor_solicitud" caption="Monto ($)" [width]="100" format="currency"></dxi-column>
+                    <dxi-column dataField="de_justificacion" caption="Justificación/Motivo"></dxi-column>
+                    <dxi-column dataField="de_estado_id" caption="Estado" cellTemplate="estadoCellTemplate" [width]="150"></dxi-column>
+
+                    <div *dxTemplate="let estado of 'estadoCellTemplate'">
+                        <span class="label label-inverse" *ngIf="estado.value === '1'">Pendiente Aprobar</span>
+                        <span class="label label-success" *ngIf="estado.value === '2'">Aprobado</span>
+                        <span class="label label-danger" *ngIf="estado.value === '3'">Rechazada</span>
+                    </div>
+                </dx-data-grid>
+            </div>
+        </div>
+    </div>
+</div>

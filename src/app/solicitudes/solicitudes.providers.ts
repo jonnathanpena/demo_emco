@@ -55,6 +55,13 @@ export class  SolicitudesProvider {
       .map((res: Response) => res);
   }
 
+  public updateFormulario(objeto: any) {
+    return this.http.post(this.urlProvider.updateFormulario(), JSON.stringify(objeto), {
+      headers: new Headers({'Content-Type': 'application/json'})
+    })
+      .map((res: Response) => res);
+  }
+
   public moveImage(objeto: any) {
     return this.http.post(this.urlProvider.moveImage(), JSON.stringify(objeto), {
       headers: new Headers({'Content-Type': 'application/json'})

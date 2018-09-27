@@ -97,6 +97,10 @@ export class ULRProvider {
   public insertFormularioAll() {
     return this.dominio + 'formulario/insertAll.php';
   }
+
+  public updateFormulario() {
+    return this.dominio + 'formulario/update.php';
+  }
   /* FIN FORMULARIO */
 
   /* DETALLE FORMULARIO     */
