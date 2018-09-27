@@ -41,7 +41,7 @@
                                 </dx-text-box>
                             </div>
                             <div class="form-group">
-                                <label>Adjuntar archivo</label>
+                                <label>Adjuntar archivo (1)</label>
                                 <dx-file-uploader uploadUrl="http://proconty.com/API/demo/upload/upload.php" name="file" (onUploaded)="uploaded($event)" (onUploadError)="uploadError($event)" [multiple]="false" accept="*" [(value)]="imagenes" uploadMode="instantly"></dx-file-uploader>
                             </div>
                         </div>
@@ -114,7 +114,11 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <input type="file" (change)="handleFile($event)" style="margin-top: 10px;" />
+                <input type="file" (change)="handleFile($event)" style="margin-top: 10px;" />                
+                <label style="margin-left: 70px; display: right; margin-top: 10px; margin-bottom: 10px;">Descargar Formato</label>
+                <a style="margin-left: 10px; display: right; margin-top: 10px; margin-bottom: 10px;" class="btn btn-info" href="http://www.proconty.com/API/demo/documentos/solicitudes.xlsx" target="_self" title="Descargar formato" download="solicitudes.xlsx">
+                    <i class="mdi mdi-download"></i>
+                </a>
                 <dx-data-grid [dataSource]="solicitudes" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true">
 
                     <dxo-paging [pageSize]="10"></dxo-paging>
@@ -127,6 +131,7 @@
                 </dx-data-grid>
                 <dx-button icon="remove" style="margin-left: 10px; display: right; margin-top: 10px;" type="danger" text="Cancelar" (click)="salir()"></dx-button>
                 <dx-button icon="check" style="margin-left: 10px; display: right; margin-top: 10px;" type="success" [disabled]="guardando" text="Guardar" (click)="guardarForm3()"></dx-button>
+                
             </div>
         </div>
     </div>
