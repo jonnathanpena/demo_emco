@@ -1,0 +1,129 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card-group m-b-30">
+            <!-- Column -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="m-b-0"><i class="mdi mdi-alert-circle text-inverse"></i></h2>
+                            <h3 class="">${{ totales.pendientes }}</h3>
+                            <h6 class="card-subtitle">Pendiente Aprobar</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="m-b-0"><i class="mdi mdi-briefcase-check text-success"></i></h2>
+                            <h3 class="">${{ totales.aprobados }}</h3>
+                            <h6 class="card-subtitle">Aprobador</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Column -->
+            <!-- Column -->
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="m-b-0"><i class="mdi mdi-calendar-remove text-danger"></i></h2>
+                            <h3 class="">${{ totales.rechazados }}</h3>
+                            <h6 class="card-subtitle">Rechazados</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h2 class="m-b-0"><i class="mdi mdi-cash-usd text-info"></i></h2>
+                            <h3 class="">${{ totales.total }}</h3>
+                            <h6 class="card-subtitle">Total</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <dx-chart id="chart" title="Formularios Por Estados" [dataSource]="dataSource">
+                    <dxi-series argumentField="de_nombre_estado" valueField="formularios" name="Cant de Formularios" type="bar" color="#ffaa66">
+                    </dxi-series>
+                </dx-chart>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                <dx-pie-chart id="pie" title="Valor ($) Por Estados" palette="bright" [dataSource]="areas" (onPointClick)="pointClickHandler($event)" (onLegendClick)="legendClickHandler($event)">
+                    <dxi-series argumentField="de_nombre_estado" valueField="valor">
+                        <dxo-label [visible]="true">
+                            <dxo-connector [visible]="true" [width]="1"></dxo-connector>
+                        </dxo-label>
+                    </dxi-series>
+                    <dxo-size [width]="500"></dxo-size>
+                    <dxo-export [enabled]="true"></dxo-export>
+                </dx-pie-chart>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <dx-chart id="chart" title="Formularios por Cantones" [dataSource]="grossProductData" (onPointClick)="onPointClick($event)">
+                    <dxi-series valueField="aprobado" name="Aprobado"></dxi-series>
+                    <dxi-series valueField="pendiente" name="Pendiente"></dxi-series>
+                    <dxi-series valueField="rechazado" name="Rechazado"></dxi-series>
+                    <dxo-common-series-settings argumentField="nombre_intcant" type="bar" hoverMode="allArgumentPoints" selectionMode="allArgumentPoints">
+                        <dxo-label [visible]="true" [format]="{
+                          type: 'fixedPoint',
+                          precision: '0'
+                      }">
+                        </dxo-label>
+                    </dxo-common-series-settings>
+                    <dxo-legend verticalAlignment="bottom" horizontalAlignment="center">
+                    </dxo-legend>
+                    <dxo-export [enabled]="true"></dxo-export>
+                </dx-chart>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <dx-chart id="chart" title="Formularios por Cantones" [dataSource]="maleAgeData">
+                    <dxi-series valueField="aprobado" name="Aprobado"></dxi-series>
+                    <dxi-series valueField="pendiente" name="Pendiente"></dxi-series>
+                    <dxi-series valueField="rechazado" name="Rechazado"></dxi-series>
+                    <dxi-value-axis position="right">
+                        <dxo-title text="cantidad"></dxo-title>
+                    </dxi-value-axis>
+                    <dxo-common-series-settings argumentField="nombre_intcant" type="stackedBar">
+                    </dxo-common-series-settings>
+                    <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="top">
+                    </dxo-legend>
+                    <dxo-export [enabled]="true"></dxo-export>
+                    <dxo-tooltip [enabled]="true" location="edge" [customizeTooltip]="customizeTooltip">
+                    </dxo-tooltip>
+                </dx-chart>
+            </div>
+        </div>
+    </div>
+</div>

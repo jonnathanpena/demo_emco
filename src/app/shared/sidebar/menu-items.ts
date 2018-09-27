@@ -2,7 +2,7 @@
 
 export const ROUTES = [
   {
-    path: '/inicio',
+    path: '/dashboard',
     title: 'Dashboards',
     icon: 'mdi mdi-gauge',
     class: '',

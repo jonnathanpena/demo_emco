@@ -123,4 +123,22 @@ export class ULRProvider {
   }
   /* FIN LOGIN */
 
+  /* DETALLE cantidad estado     */
+  public graficoCantidadEstado() {
+    return this.dominio + 'kpi/getCantEdo.php';
+  }
+  /* FIN cantidad estado  */
+
+  /* DETALLE valor estado     */
+  public graficoValorEstado() {
+    return this.dominio + 'kpi/getValorEdo.php';
+  }
+  /* FIN valor estado  */
+
+  /* DETALLE cantidad ciudad     */
+  public graficoCantCiudad() {
+    return this.dominio + 'kpi/getCantCiudad.php';
+  }
+  /* FIN cantidad ciudad */
+
 }

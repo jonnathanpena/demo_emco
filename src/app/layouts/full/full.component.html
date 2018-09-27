@@ -14,7 +14,7 @@
         'red': color == 'red',
         'blue': color == 'blue',
         'purple': color == 'purple',
-        'megna': color == 'megna', 
+        'megna': color == 'megna',
         'mini-sidebar': showMinisidebar,
         'dark-theme': showDarktheme
     }
@@ -22,7 +22,7 @@
     <!-- ============================================================== -->
     <!-- Topbar header - style you can find in pages.scss -->
     <!-- ============================================================== -->
-    
+
     <ap-navigation></ap-navigation>
     <!-- ============================================================== -->
     <!-- Left Sidebar - style you can find in sidebar.scss  -->
@@ -46,7 +46,7 @@
         <!-- Container fluid  -->
         <!-- ============================================================== -->
         <div class="container-fluid">
-            
+
             <!-- ============================================================== -->
             <!-- Start Page Content -->
             <!-- ============================================================== -->
@@ -57,13 +57,13 @@
             <!-- ============================================================== -->
             <!-- Setting Right sidebar -->
             <!-- ============================================================== -->
-            <button class="right-side-toggle btn-inverse btn btn-circle btn-lg" (click)="showSettings = !showSettings"><i class="ti-settings text-white fa-spin"></i></button>
+            <!--<button class="right-side-toggle btn-inverse btn btn-circle btn-lg" (click)="showSettings = !showSettings"><i class="ti-settings text-white fa-spin"></i></button>-->
             <div class="right-sidebar" [ngClass]="{'shw-rside': showSettings}">
                 <div class="slimscrollright">
                     <div class="rpanel-title"> Settings <span><i class="ti-close right-side-toggle" (click)="showSettings = !showSettings"></i></span> </div>
                     <div class="r-panel-body" [perfectScrollbar]="config">
-                        
-                        <ul>    
+
+                        <ul>
                             <li class="m-b-20 m-t-20"><b>Light Sidebar / Colors</b></li>
                             <li>
                                 <div class="custom-control custom-checkbox">
@@ -96,14 +96,14 @@
                                 </div>
                             </li>
                             <li>
-                               <div class="custom-control custom-checkbox">
-                                   <input class="custom-control-input" id="ct7" name="radio-stacked" type="radio" value="megna" [(ngModel)]="color">
-                                   <label class="custom-control-label text-megna" for="ct7">Megna</label>
-                               </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" id="ct7" name="radio-stacked" type="radio" value="megna" [(ngModel)]="color">
+                                    <label class="custom-control-label text-megna" for="ct7">Megna</label>
+                                </div>
                             </li>
-                        </ul>    
-                            <hr>
-                        <ul>    
+                        </ul>
+                        <hr>
+                        <ul>
                             <li class="m-b-20"><b>Dark Sidebar / Colors</b></li>
                             <li>
                                 <div class="custom-control custom-checkbox">
@@ -130,10 +130,10 @@
                                 </div>
                             </li>
                             <li>
-                               <div class="custom-control custom-checkbox">
-                                     <input class="custom-control-input" id="ct12" name="radio-stacked" type="radio" value="purpledark" [(ngModel)]="color">
-                                     <label class="custom-control-label text-purple" for="ct12">Purple</label>
-                               </div>
+                                <div class="custom-control custom-checkbox">
+                                    <input class="custom-control-input" id="ct12" name="radio-stacked" type="radio" value="purpledark" [(ngModel)]="color">
+                                    <label class="custom-control-label text-purple" for="ct12">Purple</label>
+                                </div>
                             </li>
                             <li>
                                 <div class="custom-control custom-checkbox">
@@ -153,8 +153,8 @@
                             </li>
                             <li>
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" id="ct15" [(ngModel)]="showDarktheme" class="custom-control-input"> 
-                                    <label class="custom-control-label" for="ct15">Dark Theme</label> 
+                                    <input type="checkbox" id="ct15" [(ngModel)]="showDarktheme" class="custom-control-input">
+                                    <label class="custom-control-label" for="ct15">Dark Theme</label>
                                 </div>
                             </li>
                         </ul>
@@ -172,15 +172,15 @@
     </div>
     <!-- ============================================================== -->
     <!-- End Page wrapper  -->
-    <!-- ============================================================== -->    
+    <!-- ============================================================== -->
     <!-- ============================================================== -->
     <!-- footer -->
     <!-- ============================================================== -->
     <footer class="footer">
-        © 2018 Admin Press Angular by wrappixel.com
+        © 2018 Proconty | Soluciones efectivas
     </footer>
     <!-- ============================================================== -->
     <!-- End footer -->
     <!-- ============================================================== -->
-    
+
 </div>

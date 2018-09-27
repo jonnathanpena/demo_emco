@@ -8,10 +8,20 @@ import { BlankComponent } from './layouts/blank/blank.component';
 export const routes: Routes = [
 {
     path: '',
+    component: BlankComponent,
+    children: [
+        {
+            path: 'authentication',
+            loadChildren: './authentication/authentication.module#AuthenticationModule'
+        }
+    ]
+},
+{
+    path: '',
     component: FullComponent,
     children: [
-        { path: '', redirectTo: '/dashboard/dashboard1', pathMatch: 'full' },
-        { path: 'dashboard', loadChildren: './dashboards/dashboard.module#DashboardModule' },
+        { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+        { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
         { path: 'starter', loadChildren: './starter/starter.module#StarterModule' },
         { path: 'component', loadChildren: './component/component.module#ComponentsModule' },
         { path: 'icons', loadChildren: './icons/icons.module#IconsModule' },
@@ -22,16 +32,6 @@ export const routes: Routes = [
         { path: 'sample-pages', loadChildren: './sample-pages/sample-pages.module#SamplePagesModule' },
         { path: 'usuarios', loadChildren: './usuarios/usarios.module#UsuariosModule'},
         { path: 'solicitudes', loadChildren: './solicitudes/solicitudes.module#SolicitudesModule'}
-    ]
-},
-{
-    path: '',
-    component: BlankComponent,
-    children: [
-        {
-            path: 'authentication',
-            loadChildren: './authentication/authentication.module#AuthenticationModule'
-        }
     ]
 },
 {

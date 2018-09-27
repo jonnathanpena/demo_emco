@@ -139,7 +139,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
               ));
               usuario.isLoggedin = true;
               localStorage.setItem('demo_emco_user', JSON.stringify(usuario.data[0]));
-              this.router.navigate(['/dashboard/dashboard1']);
+              this.router.navigate(['/dashboard']);
             } else {
               localStorage.setItem('demo_emco_menu', JSON.stringify(
                 [
@@ -190,7 +190,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
         } else {
           usuario.isLoggedin = true;
           localStorage.setItem('demo_emco_user', JSON.stringify(usuario));
-          this.router.navigate(['/dashboard/dashboard1']);
+          this.router.navigate(['/dashboard']);
         }
       });
     }
