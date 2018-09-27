@@ -113,4 +113,10 @@ export class ULRProvider {
   }
   /* FIN valor estado  */
 
+  /* DETALLE cantidad ciudad     */
+  public graficoCantCiudad() {
+    return this.dominio + 'kpi/getCantCiudad.php';
+  }
+  /* FIN cantidad ciudad */
+
 }

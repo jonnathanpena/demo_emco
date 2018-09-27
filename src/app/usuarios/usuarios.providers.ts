@@ -63,4 +63,9 @@ export class  UsuariosProvider {
     .map((res: Response) => res.json());
   }
 
+  public graficoCantCiudad() {
+    return this.http.get(this.urlProvider.graficoCantCiudad())
+    .map((res: Response) => res.json());
+  }
+
 }

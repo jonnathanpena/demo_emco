@@ -10,6 +10,8 @@ export class ListarUsuariosComponent implements OnInit {
   usuarios: any = [];
   dataSource: any = [];
   areas: any = [];
+  grossProductData: any = [];
+  maleAgeData: any = [];
 
   constructor(
     private services: UsuariosProvider
@@ -28,6 +30,13 @@ export class ListarUsuariosComponent implements OnInit {
     this.services.graficoValorEstado().subscribe(response => {
       this.areas = response.data;
       console.log('valor x edo', this.areas);
+    });
+    this.services.graficoCantCiudad().subscribe(response => {
+      this.grossProductData = response.data;
+      console.log('valor x edo', this.grossProductData);
+    });
+    this.services.graficoCantCiudad().subscribe(response => {
+      this.maleAgeData = response.data;
     });
   }
 }

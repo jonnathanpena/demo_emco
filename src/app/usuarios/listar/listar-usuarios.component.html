@@ -55,11 +55,12 @@
             <div class="card-body">
                     <dx-chart
                     id="chart"
+                    title="Formularios Por Estados"
                     [dataSource]="dataSource">
                     <dxi-series
                         argumentField="de_nombre_estado"
                         valueField="formularios"
-                        name="Cantidad de Formulario por Estados"
+                        name="Cant de Formularios"
                         type="bar"
                         color="#ffaa66">
                     </dxi-series>
@@ -93,3 +94,74 @@
             </div>
         </div>
 </div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+            <dx-chart
+                id="chart"
+                title="Formularios por Cantones"
+                [dataSource]="grossProductData"
+                (onPointClick)="onPointClick($event)">
+                <dxi-series valueField="aprobado" name="Aprobado"></dxi-series>
+                <dxi-series valueField="pendiente" name="Pendiente"></dxi-series>
+                <dxi-series valueField="rechazado" name="Rechazado"></dxi-series>
+                <dxo-common-series-settings
+                    argumentField="nombre_intcant"
+                    type="bar"
+                    hoverMode="allArgumentPoints"
+                    selectionMode="allArgumentPoints">
+                    <dxo-label
+                        [visible]="true"
+                        [format]="{
+                            type: 'fixedPoint',
+                            precision: '0'
+                        }">
+                    </dxo-label>
+                </dxo-common-series-settings>
+                <dxo-legend
+                    verticalAlignment="bottom"
+                    horizontalAlignment="center">
+                </dxo-legend>
+                <dxo-export [enabled]="true"></dxo-export>
+            </dx-chart>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+            <dx-chart
+                id="chart"
+                title="Formularios por Cantones"
+                [dataSource]="maleAgeData">
+                <dxi-series valueField="aprobado" name="Aprobado"></dxi-series>
+                <dxi-series valueField="pendiente" name="Pendiente"></dxi-series>
+                <dxi-series valueField="rechazado" name="Rechazado"></dxi-series>
+                <dxi-value-axis position="right">
+                    <dxo-title text="cantidad"></dxo-title>
+                </dxi-value-axis>
+                <dxo-common-series-settings
+                    argumentField="nombre_intcant"
+                    type="stackedBar">
+                </dxo-common-series-settings>
+                <dxo-legend
+                    verticalAlignment="bottom"
+                    horizontalAlignment="center"
+                    itemTextPosition="top">
+                </dxo-legend>
+                <dxo-export [enabled]="true"></dxo-export>
+                <dxo-tooltip
+                    [enabled]="true"
+                    location="edge"
+                    [customizeTooltip]="customizeTooltip">
+                </dxo-tooltip>
+            </dx-chart>
+            </div>
+        </div>
+    </div>
+</div>
+
