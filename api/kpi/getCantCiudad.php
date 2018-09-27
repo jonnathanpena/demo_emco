@@ -35,9 +35,13 @@ if($num>0){
         
         //Los nombres acá son iguales a los de la clase iguales a las columnas de la BD
         $kpi_item=array(
-            "formularios"=>$formularios, 
+            /*"formularios"=>$formularios, 
             "de_nombre_dpto"=>$de_nombre_dpto,
-            "nombre_intcant"=>$nombre_intcant
+            "nombre_intcant"=>$nombre_intcant*/
+            "nombre_intcant"=>$nombre_intcant, 
+            "pendiente"=>$pendiente,
+            "aprobado"=>$aprobado,
+            "rechazado"=>$rechazado
         );
  
         array_push($kpi_arr["data"], $kpi_item);

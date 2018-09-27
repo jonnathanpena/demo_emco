@@ -69,4 +69,18 @@ export class  SolicitudesProvider {
       .map((res: Response) => res);
   }
 
+  public sendMail(objeto: any) {
+    return this.http.post(this.urlProvider.sendMail(), JSON.stringify(objeto), {
+      headers: new Headers({'Content-Type': 'application/json'})
+    })
+      .map((res: Response) => res);
+  }
+
+  public sendMailAprobador(objeto: any) {
+    return this.http.post(this.urlProvider.sendMailAprobador(), JSON.stringify(objeto), {
+      headers: new Headers({'Content-Type': 'application/json'})
+    })
+      .map((res: Response) => res);
+  }
+
 }

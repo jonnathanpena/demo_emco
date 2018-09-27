@@ -1,0 +1,6 @@
+[27-Sep-2018 12:22:21 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/proco389/public_html/API/demo/formulario/insertAll.php on line 26
+[27-Sep-2018 12:22:21 UTC] PHP Stack trace:
+[27-Sep-2018 12:22:21 UTC] PHP   1. {main}() /home/proco389/public_html/API/demo/formulario/insertAll.php:0
+[27-Sep-2018 14:49:11 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/proco389/public_html/API/demo/formulario/insertAll.php on line 26
+[27-Sep-2018 14:49:11 UTC] PHP Stack trace:
+[27-Sep-2018 14:49:11 UTC] PHP   1. {main}() /home/proco389/public_html/API/demo/formulario/insertAll.php:0

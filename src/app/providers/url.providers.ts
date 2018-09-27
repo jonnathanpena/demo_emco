@@ -141,4 +141,14 @@ export class ULRProvider {
   }
   /* FIN cantidad ciudad */
 
+  /* DETALLE cantidad ciudad     */
+  public sendMail() {
+    return this.dominio + 'email/send.php';
+  }
+
+  public sendMailAprobador() {
+    return this.dominio + 'email/sendAprobacion.php';
+  }
+  /* FIN cantidad ciudad */
+
 }

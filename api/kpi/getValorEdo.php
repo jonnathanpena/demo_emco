@@ -36,7 +36,8 @@ if($num>0){
         //Los nombres acá son iguales a los de la clase iguales a las columnas de la BD
         $kpi_item=array(
             "valor"=>$valor, 
-            "de_nombre_estado"=>$de_nombre_estado
+            "de_nombre_estado"=>$de_nombre_estado,
+            "total"=>$total
         );
  
         array_push($kpi_arr["data"], $kpi_item);

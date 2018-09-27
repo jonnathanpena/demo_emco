@@ -73,6 +73,14 @@ export class ListarSolicitudesComponent implements OnInit {
       }
     ).subscribe(response => {
         if (response['_body'] === 'true' || response['_body'] === true) {
+          this.sendMailAprobador(
+            {
+              usuario: data.data.de_usuario,
+              estado: 'APROBADA',
+              solicitud: data.data.de_transaccion,
+              email: data.data.de_correo_per
+            }
+          );
           notify('Solicitud aprobada exitosamente', 'success', 2000);
         } else {
           notify('Compruebe su conexión a internet e intente nuevamente', 'error', 2000);
@@ -89,11 +97,25 @@ export class ListarSolicitudesComponent implements OnInit {
       }
     ).subscribe(response => {
         if (response['_body'] === 'true' || response['_body'] === true) {
-          notify('Solicitud aprobada exitosamente', 'success', 2000);
+          this.sendMailAprobador(
+            {
+              usuario: data.data.de_usuario,
+              estado: 'RECHAZADA',
+              solicitud: data.data.de_transaccion,
+              email: data.data.de_correo_per
+            }
+          );
+          notify('Solicitud rechazada exitosamente', 'success', 2000);
         } else {
           notify('Compruebe su conexión a internet e intente nuevamente', 'error', 2000);
         }
         this.getAllFormularios();
+    });
+  }
+
+  sendMailAprobador(data) {
+    this.services.sendMailAprobador(data).subscribe(response => {
+      console.log('response aprobador', response);
     });
   }
 }

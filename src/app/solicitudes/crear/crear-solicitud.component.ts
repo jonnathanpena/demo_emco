@@ -128,6 +128,7 @@ export class CrearSolicitudComponent implements OnInit {
         notify('Algo sucedió mal, por favor verifique la información e intente nuevamente', 'error', 2000);
         this.cancelar();
       } else {
+        this.senMail();
         if (this.formulario.de_adjunto === 1) {
           this.insertDetalleForm1(response['_body']);
         } else {
@@ -169,6 +170,21 @@ export class CrearSolicitudComponent implements OnInit {
     });
   }
 
+  senMail() {
+    const usuario = JSON.parse(localStorage.getItem('demo_emco_user'));
+    this.services.sendMail(
+      {
+        usuario: usuario.de_usuario,
+        valor_solicitud: this.formulario.de_valor_solicitud,
+        justificacion: this.formulario.de_justificacion,
+        transaccion: this.formulario.de_transaccion,
+        fecha: this.formulario.de_fecha_creacion
+      }
+    ).subscribe(response => {
+      console.log('response mail', response);
+    });
+  }
+
   guardarForm2(e) {
     e.preventDefault();
     this.guardando = true;
@@ -196,6 +212,22 @@ export class CrearSolicitudComponent implements OnInit {
       } else {
         notify('Compruebe su conexión a internet e intente nuevamente', 'error', 2000);
       }
+      const usuario = JSON.parse(localStorage.getItem('demo_emco_user'));
+      let total = 0;
+      for (let i = 0; i < this.excel.length; i++) {
+        total += this.excel[i].de_valor_solicitud * 1;
+      }
+      this.services.sendMail(
+        {
+          usuario: usuario.de_usuario,
+          valor_solicitud: total,
+          justificacion: this.excel[0].de_justificacion,
+          transaccion: 'Múltiples',
+          fecha: this.now
+        }
+      ).subscribe(response => {
+        console.log('response mail', response);
+      });
       setTimeout(() => {
         this.salir();
       }, 4000);
