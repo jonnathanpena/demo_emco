@@ -18,7 +18,9 @@ import {
   DxButtonModule,
   DxDataGridModule,
   DxBulletModule,
-  DxTemplateModule
+  DxTemplateModule,
+  DxChartModule,
+  DxPieChartModule
 } from 'devextreme-angular';
 
 @NgModule({
@@ -33,7 +35,9 @@ import {
     DxButtonModule,
     DxDataGridModule,
     DxBulletModule,
-    DxTemplateModule
+    DxTemplateModule,
+    DxChartModule,
+    DxPieChartModule
   ],
   declarations: [
     CrearUsuarioComponent,

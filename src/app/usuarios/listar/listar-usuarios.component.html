@@ -48,3 +48,48 @@
         </div>
     </div>
 </div>
+
+<div class="row">
+    <div class="col-6">
+        <div class="card">
+            <div class="card-body">
+                    <dx-chart
+                    id="chart"
+                    [dataSource]="dataSource">
+                    <dxi-series
+                        argumentField="de_nombre_estado"
+                        valueField="formularios"
+                        name="Cantidad de Formulario por Estados"
+                        type="bar"
+                        color="#ffaa66">
+                    </dxi-series>
+                </dx-chart>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+            <div class="card">
+                <div class="card-body">
+                        <dx-pie-chart
+                            id="pie"
+                            title="Valor ($) Por Estados"
+                            palette="bright"
+                            [dataSource]="areas"
+                            (onPointClick)="pointClickHandler($event)"
+                            (onLegendClick)="legendClickHandler($event)">
+                            <dxi-series
+                                argumentField="de_nombre_estado"
+                                valueField="valor">
+                                <dxo-label [visible]="true">
+                                    <dxo-connector
+                                        [visible]="true"
+                                        [width]="1"></dxo-connector>
+                                </dxo-label>
+                            </dxi-series>
+                            <dxo-size [width]="500"></dxo-size>
+                            <dxo-export [enabled]="true"></dxo-export>
+                        </dx-pie-chart>
+                </div>
+            </div>
+        </div>
+</div>

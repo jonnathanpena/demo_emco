@@ -53,4 +53,14 @@ export class  UsuariosProvider {
       .map((res: Response) => res);
   }
 
+  public graficoCantidadEstado() {
+    return this.http.get(this.urlProvider.graficoCantidadEstado())
+    .map((res: Response) => res.json());
+  }
+
+  public graficoValorEstado() {
+    return this.http.get(this.urlProvider.graficoValorEstado())
+    .map((res: Response) => res.json());
+  }
+
 }

@@ -8,6 +8,8 @@ import { UsuariosProvider } from '../usuarios.providers';
 })
 export class ListarUsuariosComponent implements OnInit {
   usuarios: any = [];
+  dataSource: any = [];
+  areas: any = [];
 
   constructor(
     private services: UsuariosProvider
@@ -18,6 +20,14 @@ export class ListarUsuariosComponent implements OnInit {
     this.services.allUsuarios().subscribe(response => {
       this.usuarios = response.data;
       console.log('usuarios', this.usuarios);
+    });
+    this.services.graficoCantidadEstado().subscribe(response => {
+      this.dataSource = response.data;
+      console.log('cant x edo', this.dataSource);
+    });
+    this.services.graficoValorEstado().subscribe(response => {
+      this.areas = response.data;
+      console.log('valor x edo', this.areas);
     });
   }
 }
