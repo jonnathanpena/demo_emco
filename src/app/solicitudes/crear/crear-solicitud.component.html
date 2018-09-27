@@ -114,12 +114,12 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <input type="file" (change)="handleFile($event)" style="margin-top: 10px;" />                
+                <input type="file" (change)="handleFile($event)" style="margin-top: 10px;" />
                 <label style="margin-left: 70px; display: right; margin-top: 10px; margin-bottom: 10px;">Descargar Formato</label>
                 <a style="margin-left: 10px; display: right; margin-top: 10px; margin-bottom: 10px;" class="btn btn-info" href="http://www.proconty.com/API/demo/documentos/solicitudes.xlsx" target="_self" title="Descargar formato" download="solicitudes.xlsx">
                     <i class="mdi mdi-download"></i>
                 </a>
-                <dx-data-grid [dataSource]="solicitudes" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true">
+                <dx-data-grid [dataSource]="solicitudes" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true" [columnAutoWidth]="true">
 
                     <dxo-paging [pageSize]="10"></dxo-paging>
                     <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]" infoText="Page #{0}. Total: {1} ({2} usuarios)"></dxo-pager>
@@ -131,7 +131,7 @@
                 </dx-data-grid>
                 <dx-button icon="remove" style="margin-left: 10px; display: right; margin-top: 10px;" type="danger" text="Cancelar" (click)="salir()"></dx-button>
                 <dx-button icon="check" style="margin-left: 10px; display: right; margin-top: 10px;" type="success" [disabled]="guardando" text="Guardar" (click)="guardarForm3()"></dx-button>
-                
+
             </div>
         </div>
     </div>

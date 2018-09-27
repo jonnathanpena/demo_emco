@@ -2,7 +2,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <dx-data-grid [dataSource]="solicitudes" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true">
+                <dx-data-grid [dataSource]="solicitudes" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [columnAutoWidth]="true" [showBorders]="true">
 
                     <dxo-paging [pageSize]="10"></dxo-paging>
                     <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
@@ -43,7 +43,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-body">
-                <dx-data-grid [dataSource]="formularios" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [showBorders]="true">
+                <dx-data-grid [dataSource]="formularios" [allowColumnReordering]="true" [rowAlternationEnabled]="true" [columnAutoWidth]="true" [showBorders]="true">
 
                     <dxo-paging [pageSize]="10"></dxo-paging>
                     <dxo-pager [showPageSizeSelector]="true" [allowedPageSizes]="[10, 25, 50, 100]"></dxo-pager>
