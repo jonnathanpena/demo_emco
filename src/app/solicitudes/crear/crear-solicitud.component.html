@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label>Solicitud</label>
+                                <label>Solicitud $</label>
                                 <dx-text-box mode="number" class="form-control" [(value)]="formulario.de_valor_solicitud">
                                     <dx-validator>
                                         <dxi-validation-rule type="required" message="Monto de solicitud es requerida"></dxi-validation-rule>
@@ -78,8 +78,22 @@
                                     </dx-validator>
                                 </dx-text-box>
                             </div>
+                            <div class="form-group">
+                                <label>Tipo Documento</label>
+                                <dx-select-box [items]="tipoDocumento" [searchEnabled]="true" (onValueChanged)="cambiaTipoDocumento($event)" placeholder="Seleccione...">
+                                    <dxi-validation-rule type="required" message="Tipo de Documento es requerido"></dxi-validation-rule>
+                                </dx-select-box>
+                            </div>
                         </div>
                         <div class="col-sm-6">
+                            <div class="form-group">
+                                <label>Número Documento</label>
+                                <dx-text-box class="form-control" [(value)]="datosNuevo.de_num_documento">
+                                    <dx-validator>
+                                        <dxi-validation-rule type="required" message="Número de Documento es requerido"></dxi-validation-rule>
+                                    </dx-validator>
+                                </dx-text-box>
+                            </div>
                             <div class="form-group">
                                 <label>Monto</label>
                                 <dx-text-box mode="number" class="form-control" [(value)]="formulario.de_valor_solicitud">
@@ -95,6 +109,14 @@
                                         <dxi-validation-rule type="required" message="Justificación es requerida"></dxi-validation-rule>
                                     </dx-validator>
                                 </dx-text-box>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Prioridad</label>
+                                    <!--<toggle [on]="true" (toggled)="showMessage($event)"></toggle>-->
+                                    
+                                    </div>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label>Adjuntar archivo</label>
