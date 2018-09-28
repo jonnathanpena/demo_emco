@@ -37,6 +37,14 @@ export class CrearSolicitudComponent implements OnInit {
   };
   now: Date = new Date();
   excel: any = [];
+  tipoDocumento: any = [];  
+  datosNuevo: any = {
+    de_formulario_id: 0,
+	  de_tipo_documento: '',
+	  de_num_documento: '', 
+	  de_prioridad: ''
+  };
+
 
   constructor(
     private services: SolicitudesProvider,
@@ -48,6 +56,13 @@ export class CrearSolicitudComponent implements OnInit {
     if (localStorage.getItem('demo_emco_user') === '') {
       this.router.navigate(['/authentication/login']);
     } else {
+      this.datosNuevo = {
+        de_formulario_id: 0,
+        de_tipo_documento: '',
+        de_num_documento: '', 
+        de_prioridad: ''
+      };    
+      this.tipoDocumento = ['Factura', 'Nota de Débito', 'Nota de Crédito', 'Nota de Venta'];
       this.excel = [];
       this.condiciones = {
         form1: true,
@@ -320,4 +335,9 @@ export class CrearSolicitudComponent implements OnInit {
       }
     });
   }
+
+  cambiaTipoDocumento(e) {
+    console.log(e);
+  }
+
 }
