@@ -12,6 +12,8 @@ import { ULRProvider } from '../providers/url.providers';
 import { SolicitudesProvider } from './solicitudes.providers';
 import { XlsxToJsonService } from './xlsx-to-json-service';
 import { DatePipe } from '@angular/common';
+import { SwitchComponent } from './switch/switch.component';
+import { ToggleComponent } from './toggle/toggle.component';
 
 import {
   DxTextBoxModule,
@@ -45,7 +47,9 @@ import {
   ],
   declarations: [
     CrearSolicitudComponent,
-    ListarSolicitudesComponent
+    ListarSolicitudesComponent,
+    SwitchComponent,
+    ToggleComponent
   ],
   providers: [
     ULRProvider,

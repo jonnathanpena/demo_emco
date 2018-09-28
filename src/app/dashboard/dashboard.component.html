@@ -56,9 +56,12 @@
 <div class="row">
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Formularios Por Estados</h4>
+            </div>
             <div class="card-body">
-                <dx-chart id="chart" title="Formularios Por Estados" [dataSource]="dataSource">
-                    <dxi-series argumentField="de_nombre_estado" valueField="formularios" name="Cant de Formularios" type="bar" color="#ffaa66">
+                <dx-chart id="chart" [dataSource]="dataSource">
+                    <dxi-series argumentField="de_nombre_estado" valueField="formularios" type="bar" color="#ffaa66">
                     </dxi-series>
                 </dx-chart>
             </div>
@@ -66,9 +69,13 @@
     </div>
     <div class="col-md-6 col-sm-12 col-xs-12">
         <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Valor ($) Por Estados</h4>
+            </div>
             <div class="card-body">
-                <dx-pie-chart id="pie" title="Valor ($) Por Estados" palette="bright" [dataSource]="areas">
+                <dx-pie-chart id="pie" palette="bright" [dataSource]="areas" (onPointClick)="pointClickHandler($event)" (onLegendClick)="legendClickHandler($event)">
                     <dxo-adaptive-layout [height]="300" [width]="400"></dxo-adaptive-layout>
+                    <dxo-legend verticalAlignment="bottom" horizontalAlignment="center" itemTextPosition="right"></dxo-legend>
                     <dxi-series argumentField="de_nombre_estado" valueField="valor">
                         <dxo-label [visible]="true">
                             <dxo-connector [visible]="true" [width]="1"></dxo-connector>
@@ -84,8 +91,11 @@
 <div class="row">
     <div class="col-12">
         <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Formularios por Ciudades</h4>
+            </div>
             <div class="card-body">
-                <dx-chart id="chart" title="Formularios por Ciudades" [dataSource]="grossProductData">
+                <dx-chart id="chart" [dataSource]="grossProductData">
                     <dxi-series valueField="aprobado" name="Aprobado"></dxi-series>
                     <dxi-series valueField="pendiente" name="Pendiente"></dxi-series>
                     <dxi-series valueField="rechazado" name="Rechazado"></dxi-series>

@@ -4,3 +4,18 @@
 [27-Sep-2018 14:49:11 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/proco389/public_html/API/demo/formulario/insertAll.php on line 26
 [27-Sep-2018 14:49:11 UTC] PHP Stack trace:
 [27-Sep-2018 14:49:11 UTC] PHP   1. {main}() /home/proco389/public_html/API/demo/formulario/insertAll.php:0
+[27-Sep-2018 18:37:36 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/proco389/public_html/API/demo/formulario/insertAll.php on line 26
+[27-Sep-2018 18:37:36 UTC] PHP Stack trace:
+[27-Sep-2018 18:37:36 UTC] PHP   1. {main}() /home/proco389/public_html/API/demo/formulario/insertAll.php:0
+[27-Sep-2018 20:58:40 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/proco389/public_html/API/demo/formulario/insertAll.php on line 26
+[27-Sep-2018 20:58:40 UTC] PHP Stack trace:
+[27-Sep-2018 20:58:40 UTC] PHP   1. {main}() /home/proco389/public_html/API/demo/formulario/insertAll.php:0
+[27-Sep-2018 22:30:07 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/proco389/public_html/API/demo/formulario/insertAll.php on line 26
+[27-Sep-2018 22:30:07 UTC] PHP Stack trace:
+[27-Sep-2018 22:30:07 UTC] PHP   1. {main}() /home/proco389/public_html/API/demo/formulario/insertAll.php:0
+[27-Sep-2018 22:44:33 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/proco389/public_html/API/demo/formulario/insertAll.php on line 26
+[27-Sep-2018 22:44:33 UTC] PHP Stack trace:
+[27-Sep-2018 22:44:33 UTC] PHP   1. {main}() /home/proco389/public_html/API/demo/formulario/insertAll.php:0
+[27-Sep-2018 22:56:28 UTC] PHP Warning:  count(): Parameter must be an array or an object that implements Countable in /home/proco389/public_html/API/demo/formulario/insertAll.php on line 26
+[27-Sep-2018 22:56:28 UTC] PHP Stack trace:
+[27-Sep-2018 22:56:28 UTC] PHP   1. {main}() /home/proco389/public_html/API/demo/formulario/insertAll.php:0

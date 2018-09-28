@@ -57,6 +57,10 @@
 <div class="row" *ngIf="condiciones.form2">
     <div class="col-12">
         <div class="card">
+            <div class="card-header">
+                <toggle [on]="false" (toggled)="showMessage($event)" style="float: right;"></toggle>
+                <label style="float: right; margin-right: 10px; padding-top: 0.4em;">Prioridad {{ datosNuevo.de_prioridad }}</label>
+            </div>
             <div class="card-body">
                 <form (submit)="guardarForm2($event)" class="form-horizontal m-t-40">
                     <div class="form-group row p-t-20">
@@ -110,22 +114,14 @@
                                     </dx-validator>
                                 </dx-text-box>
                             </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Prioridad</label>
-                                    <!--<toggle [on]="true" (toggled)="showMessage($event)"></toggle>-->
-                                    
-                                    </div>
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label>Adjuntar archivo</label>
                                 <dx-file-uploader uploadUrl="http://proconty.com/API/demo/upload/upload.php" name="file" (onUploaded)="uploaded($event)" (onUploadError)="uploadError($event)" [multiple]="false" accept="*" [(value)]="imagenes" uploadMode="instantly"></dx-file-uploader>
                             </div>
                         </div>
-                        <dx-button icon="remove" style="margin-left: 10px; display: right" type="danger" [disabled]="guardando" text="Cancelar" (click)="cancelar()"></dx-button>
-                        <dx-button icon="check" style="margin-left: 10px; display: right" type="success" [useSubmitBehavior]="true" [disabled]="guardando" text="Guardar"></dx-button>
                     </div>
+                    <dx-button icon="remove" style="margin-left: 10px; display: right" type="danger" [disabled]="guardando" text="Cancelar" (click)="cancelar()"></dx-button>
+                    <dx-button icon="check" style="margin-left: 10px; display: right" type="success" [useSubmitBehavior]="true" [disabled]="guardando" text="Guardar"></dx-button>
                 </form>
             </div>
         </div>

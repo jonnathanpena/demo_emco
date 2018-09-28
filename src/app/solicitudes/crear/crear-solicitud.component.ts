@@ -37,12 +37,12 @@ export class CrearSolicitudComponent implements OnInit {
   };
   now: Date = new Date();
   excel: any = [];
-  tipoDocumento: any = [];  
+  tipoDocumento: any = [];
   datosNuevo: any = {
     de_formulario_id: 0,
-	  de_tipo_documento: '',
-	  de_num_documento: '', 
-	  de_prioridad: ''
+    de_tipo_documento: '',
+    de_num_documento: '',
+    de_prioridad: 'BAJA'
   };
 
 
@@ -59,10 +59,10 @@ export class CrearSolicitudComponent implements OnInit {
       this.datosNuevo = {
         de_formulario_id: 0,
         de_tipo_documento: '',
-        de_num_documento: '', 
-        de_prioridad: ''
-      };    
-      this.tipoDocumento = ['Factura', 'Nota de Débito', 'Nota de Crédito', 'Nota de Venta'];
+        de_num_documento: '',
+        de_prioridad: 'BAJA'
+      };
+      this.tipoDocumento = ['FACTURA', 'NOTA DE DÉBITO', 'NOTA DE CRÉDITO', 'NOTA DE VENTA'];
       this.excel = [];
       this.condiciones = {
         form1: true,
@@ -209,6 +209,7 @@ export class CrearSolicitudComponent implements OnInit {
         notify('Algo sucedió mal, por favor verifique la información e intente nuevamente', 'error', 2000);
         this.cancelar();
       } else {
+        this.insertNuevoFormulario(response['_body']);
         if (this.formulario.de_adjunto === 1) {
           this.insertDetalleForm1(response['_body']);
         } else {
@@ -219,8 +220,15 @@ export class CrearSolicitudComponent implements OnInit {
     });
   }
 
+  insertNuevoFormulario(id) {
+    this.datosNuevo.de_formulario_id = id;
+    this.services.insertFormularioNuevo(this.datosNuevo).subscribe(response => {
+      console.log('datos nuevos', response['_body']);
+    });
+  }
+
   guardarForm3() {
-    if(this.solicitudes.length > 0){
+    if (this.solicitudes.length > 0) {
       this.guardando = true;
       this.services.insertFormularioAll({solicitudes: this.excel}).subscribe(response => {
         if (response['_body'] === 'true') {
@@ -308,6 +316,8 @@ export class CrearSolicitudComponent implements OnInit {
     this.formulario.de_adjunto = 0;
     this.getMaxId();
     this.solicitudes = [];
+    this.datosNuevo.de_formulario_id = 0;
+    this.datosNuevo.de_num_documento = '';
   }
 
   uploaded(e) {
@@ -337,7 +347,15 @@ export class CrearSolicitudComponent implements OnInit {
   }
 
   cambiaTipoDocumento(e) {
-    console.log(e);
+    this.datosNuevo.de_tipo_documento = e.value;
+  }
+
+  showMessage(value) {
+    if (value === true) {
+      this.datosNuevo.de_prioridad = 'ALTA';
+    } else {
+      this.datosNuevo.de_prioridad = 'BAJA';
+    }
   }
 
 }

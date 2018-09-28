@@ -155,4 +155,10 @@ export class ULRProvider {
   }
   /* FIN cantidad ciudad */
 
+   /* DETALLE cantidad ciudad     */
+   public insertNuevoFormulario() {
+    return this.dominio + 'formulario_nuevo/insert.php';
+  }
+  /* FIN cantidad ciudad */
+
 }

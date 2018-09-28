@@ -58,4 +58,22 @@ export class DashboardComponent implements OnInit {
       });
     }
   }
+
+  pointClickHandler(e) {
+    this.toggleVisibility(e.target);
+  }
+
+  legendClickHandler (e) {
+    const arg = e.target;
+    const item = e.component.getAllSeries()[0].getPointsByArg(arg)[0];
+    this.toggleVisibility(item);
+  }
+
+  toggleVisibility(item) {
+    if (item.isVisible()) {
+        item.hide();
+    } else {
+        item.show();
+    }
+  }
 }

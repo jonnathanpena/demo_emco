@@ -27,7 +27,6 @@ class Kpi {
         $query = "SELECT count(fm.`de_id_formulario`) as formularios, edo.`de_nombre_estado`
                     FROM `de_formulario` as fm
                     INNER JOIN `de_estado` AS edo ON (fm.`de_estado_id` = edo.de_id_estado)
-                    WHERE fm.`de_fecha_creacion` BETWEEN NOW() - INTERVAL 30 DAY AND NOW()
                     group by edo.`de_nombre_estado`
                     order by formularios ASC";
                 
@@ -48,9 +47,10 @@ class Kpi {
                     (select sum(de_valor_solicitud) FROM `de_formulario`) total
         FROM `de_formulario` as fm
         INNER JOIN `de_estado` AS edo ON (fm.`de_estado_id` = edo.de_id_estado)
-        WHERE fm.`de_fecha_creacion` BETWEEN NOW() - INTERVAL 30 DAY AND NOW()
         group by edo.`de_nombre_estado`";
-                
+        
+        //        WHERE fm.`de_fecha_creacion` BETWEEN NOW() - INTERVAL 30 DAY AND NOW()
+
         // prepare query statement
         $stmt = $this->conn->prepare($query);
     
@@ -107,10 +107,14 @@ class Kpi {
                             INNER JOIN `de_persona` AS per ON (us.de_persona_id = per.de_id_persona)
                             LEFT JOIN  `de_departamento` dpto ON (dpto.de_id_departamento = ud.de_dpto_id) 
                             LEFT JOIN `de_cantones` as can ON (per.`de_canton_per` = can.id_intcant)
-                            WHERE fm.`de_fecha_creacion` BETWEEN NOW() - INTERVAL 30 DAY AND NOW()
                             group by  can.`nombre_intcant`
-                            order by rechazado ASC";
+                            order by aprobado ASC";
+        
+        //WHERE fm.`de_fecha_creacion` BETWEEN NOW() - INTERVAL 30 DAY AND NOW()
+        //
+        
         // prepare query statement
+
         $stmt = $this->conn->prepare($query);
     
         // execute query
