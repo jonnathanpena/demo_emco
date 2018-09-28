@@ -44,6 +44,8 @@ export class CrearSolicitudComponent implements OnInit {
     de_num_documento: '',
     de_prioridad: 'BAJA'
   };
+  acceso = true;
+  dataCargada = true;
 
 
   constructor(
@@ -56,57 +58,64 @@ export class CrearSolicitudComponent implements OnInit {
     if (localStorage.getItem('demo_emco_user') === '') {
       this.router.navigate(['/authentication/login']);
     } else {
-      this.datosNuevo = {
-        de_formulario_id: 0,
-        de_tipo_documento: '',
-        de_num_documento: '',
-        de_prioridad: 'BAJA'
-      };
-      this.tipoDocumento = ['FACTURA', 'NOTA DE DÉBITO', 'NOTA DE CRÉDITO', 'NOTA DE VENTA'];
-      this.excel = [];
-      this.condiciones = {
-        form1: true,
-        form2: false,
-        form3: false
-      };
-      this.guardando = false;
-      this.imagenes = [];
-      this.solicitudes = [];
       const usuario = JSON.parse(localStorage.getItem('demo_emco_user'));
-      if (usuario.de_nombre_dpto === 'TI') {
+      if (usuario.de_nombre_dpto === null) {
+        this.acceso = false;
+      } else {
+        this.dataCargada = true;
+        this.acceso = true;
+        this.datosNuevo = {
+          de_formulario_id: 0,
+          de_tipo_documento: '',
+          de_num_documento: '',
+          de_prioridad: 'BAJA'
+        };
+        this.tipoDocumento = ['FACTURA', 'NOTA DE DÉBITO', 'NOTA DE CRÉDITO', 'NOTA DE VENTA'];
+        this.excel = [];
         this.condiciones = {
           form1: true,
           form2: false,
           form3: false
         };
-      } else if (usuario.de_nombre_dpto === 'FINANZAS') {
-        this.condiciones = {
-          form1: false,
-          form2: true,
-          form3: false
+        this.guardando = false;
+        this.imagenes = [];
+        this.solicitudes = [];
+        const usuario = JSON.parse(localStorage.getItem('demo_emco_user'));
+        if (usuario.de_nombre_dpto === 'TI') {
+          this.condiciones = {
+            form1: true,
+            form2: false,
+            form3: false
+          };
+        } else if (usuario.de_nombre_dpto === 'FINANZAS') {
+          this.condiciones = {
+            form1: false,
+            form2: true,
+            form3: false
+          };
+        } else if (usuario.de_nombre_dpto === 'TALENTO HUMANO') {
+          this.condiciones = {
+            form1: false,
+            form2: false,
+            form3: true
+          };
+        }
+        this.usuario = {
+          id: usuario.de_id_user,
+          nombre: usuario.de_usuario
         };
-      } else if (usuario.de_nombre_dpto === 'TALENTO HUMANO') {
-        this.condiciones = {
-          form1: false,
-          form2: false,
-          form3: true
+        this.formulario = {
+          de_id_usuario: this.usuario.id,
+          de_fecha_creacion: this.now,
+          de_transaccion: '',
+          de_valor_solicitud: '',
+          de_justificacion: '',
+          de_adjunto: 0,
+          de_estado_id: 1
         };
+        this.now = new Date();
+        this.getMaxId();
       }
-      this.usuario = {
-        id: usuario.de_id_user,
-        nombre: usuario.de_usuario
-      };
-      this.formulario = {
-        de_id_usuario: this.usuario.id,
-        de_fecha_creacion: this.now,
-        de_transaccion: '',
-        de_valor_solicitud: '',
-        de_justificacion: '',
-        de_adjunto: 0,
-        de_estado_id: 1
-      };
-      this.now = new Date();
-      this.getMaxId();
     }
   }
 
@@ -335,13 +344,15 @@ export class CrearSolicitudComponent implements OnInit {
     this.excel = [];
     const file = event.target.files[0];
     this.xlsxToJsonService.processFileToJson({}, file).subscribe(data => {
-      this.solicitudes = data.sheets.Hoja1;
-      if (this.solicitudes[0].Monto || this.solicitudes[0].Fecha || this.solicitudes[0].Motivo) {
+      if (data.sheets.Hoja1[0].Monto || data.sheets.Hoja1[0].Fecha || data.sheets.Hoja1[0].Motivo) {
+        this.solicitudes = data.sheets.Hoja1;
+        this.dataCargada = false;
         for (let i = 0; i < this.solicitudes.length; i++) {
           this.getIdMax(this.solicitudes[i], i);
         }
       } else {
         notify('Error en el formato, intente de nuevo', 'error', 2000);
+        this.dataCargada = true;
       }
     });
   }

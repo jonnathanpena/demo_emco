@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import notify from 'devextreme/ui/notify';
 import { UsuariosProvider } from '../usuarios.providers';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './crear-usuario.component.html',
@@ -30,39 +31,60 @@ export class CrearUsuarioComponent implements OnInit {
   cantones: any = [];
   departamentos: any = [];
   guardando: any = false;
+  acceso: any = {
+    admin: true,
+    user: false
+  };
 
   constructor(
-    private services: UsuariosProvider
+    private services: UsuariosProvider,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.usuario = {
-      de_id_persona: '',
-      de_nombre_per: '',
-      de_apellido_per: '',
-      de_celular_per: '',
-      de_correo_per: '',
-      de_canton_per: '',
-      de_id_user: '',
-      de_usuario: '',
-      de_clave: '',
-      confirme: '',
-      de_persona_id: ''
-    };
-    this.cantones = [];
-    this.provincias = [];
-    this.departamentos = [];
-    this.guardando = false;
-    this.usuario_departamento = {
-      de_user_id: '',
-      de_dpto_id: ''
-    };
-    this.services.allProvincias().subscribe(response =>  {
-      this.provincias = response.data;
-    });
-    this.services.allDepartamentos().subscribe(response => {
-      this.departamentos = response.data;
-    });
+    if (localStorage.getItem('demo_emco_user') === '') {
+      this.router.navigate(['/authentication/login']);
+    } else {
+      const usuario = JSON.parse(localStorage.getItem('demo_emco_user'));
+      if (usuario.de_nombre_dpto === null) {
+        this.acceso = {
+          admin: true,
+          user: false
+        };
+        this.usuario = {
+          de_id_persona: '',
+          de_nombre_per: '',
+          de_apellido_per: '',
+          de_celular_per: '',
+          de_correo_per: '',
+          de_canton_per: '',
+          de_id_user: '',
+          de_usuario: '',
+          de_clave: '',
+          confirme: '',
+          de_persona_id: ''
+        };
+        this.cantones = [];
+        this.provincias = [];
+        this.departamentos = [];
+        this.guardando = false;
+        this.usuario_departamento = {
+          de_user_id: '',
+          de_dpto_id: ''
+        };
+        this.services.allProvincias().subscribe(response =>  {
+          this.provincias = response.data;
+        });
+        this.services.allDepartamentos().subscribe(response => {
+          this.departamentos = response.data;
+        });
+      } else {
+        this.acceso = {
+          admin: false,
+          user: true
+        };
+      }
+    }
   }
 
   guardar(e) {

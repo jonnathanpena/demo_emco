@@ -1,4 +1,4 @@
-<div class="row" *ngIf="condiciones.form1">
+<div class="row" *ngIf="condiciones.form1 && acceso">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -54,7 +54,7 @@
     </div>
 </div>
 
-<div class="row" *ngIf="condiciones.form2">
+<div class="row" *ngIf="condiciones.form2 && acceso">
     <div class="col-12">
         <div class="card">
             <div class="card-header">
@@ -128,7 +128,7 @@
     </div>
 </div>
 
-<div class="row" *ngIf="condiciones.form3">
+<div class="row" *ngIf="condiciones.form3 && acceso">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -148,8 +148,18 @@
                     <dxi-column dataField="Motivo" caption="Justificación/Motivo"></dxi-column>
                 </dx-data-grid>
                 <dx-button icon="remove" style="margin-left: 10px; display: right; margin-top: 10px;" type="danger" text="Cancelar" (click)="salir()"></dx-button>
-                <dx-button icon="check" style="margin-left: 10px; display: right; margin-top: 10px;" type="success" [disabled]="guardando" text="Guardar" (click)="guardarForm3()"></dx-button>
+                <dx-button icon="check" style="margin-left: 10px; display: right; margin-top: 10px;" type="success" [disabled]="guardando || dataCargada" text="Guardar" (click)="guardarForm3()"></dx-button>
 
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="!acceso">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <img style="width: 100%;" src="assets/images/no_acceso.jpeg" alt="No Acceso" />
             </div>
         </div>
     </div>

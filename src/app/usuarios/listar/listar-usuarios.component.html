@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" *ngIf="acceso.admin">
     <div class="col-12">
         <div class="card">
             <div class="card-body">
@@ -12,38 +12,19 @@
 
                     <dxi-column dataField="de_nombre_per" caption="Nombre"></dxi-column>
                     <dxi-column dataField="de_apellido_per" caption="Apellido"></dxi-column>
-                    <!--<dxi-column caption="Discount %" dataField="Discount" cellTemplate="discountCellTemplate" dataType="number" format="percent" alignment="right" [allowGrouping]="false" cssClass="bullet"></dxi-column>-->
                     <dxi-column dataField="de_celular_per" caption="Celular"></dxi-column>
                     <dxi-column dataField="de_usuario" caption="Usuario"></dxi-column>
-                    <!--<dxi-column dataField="Region" dataType="string"></dxi-column>
-                <dxi-column dataField="Sector" dataType="string"></dxi-column>
-                <dxi-column dataField="Channel" dataType="string"></dxi-column>
-                <dxi-column dataField="Customer" dataType="string" [width]="150"></dxi-column>-->
-
-                    <!--<div *dxTemplate="let d of 'discountCellTemplate'">
-                      <div class="chart-cell">
-                          <dx-bullet
-                              [showTarget]="false"
-                              [showZeroLevel]="true"
-                              [startScaleValue]="0"
-                              [endScaleValue]="100"
-                              [value]="d.value * 100">
-                              <dxo-size [width]="150" [height]="35"></dxo-size>
-                              <dxo-tooltip
-                                  [enabled]="true"
-                                  [paddingTopBottom]="2"
-                                  [customizeTooltip]="customizeTooltip">
-                                  <dxo-font [size]="18"></dxo-font>
-                              </dxo-tooltip>
-                              <dxo-margin
-                                  [top]="5"
-                                  [bottom]="0"
-                                  [left]="5"
-                              ></dxo-margin>
-                          </dx-bullet>
-                      </div>
-                  </div>-->
                 </dx-data-grid>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" *ngIf="acceso.user">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <img style="width: 100%;" src="assets/images/no_acceso.jpeg" alt="No Acceso" />
             </div>
         </div>
     </div>
