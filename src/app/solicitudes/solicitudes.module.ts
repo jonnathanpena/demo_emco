@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { SolicitudesRoutes } from './solicitudes.routing';
 import { CrearSolicitudComponent } from './crear/crear-solicitud.component';
@@ -29,6 +30,7 @@ import {
   imports: [
     CommonModule,
     RouterModule.forChild(SolicitudesRoutes),
+    NgbModalModule.forRoot(),
     FormsModule,
     DxTextBoxModule,
     DxValidatorModule,

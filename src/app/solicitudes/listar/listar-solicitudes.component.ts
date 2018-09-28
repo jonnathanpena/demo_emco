@@ -1,7 +1,8 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef} from '@angular/core';
 import { Router } from '@angular/router';
 import { SolicitudesProvider } from '../solicitudes.providers';
 import notify from 'devextreme/ui/notify';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   templateUrl: './listar-solicitudes.component.html',
@@ -9,6 +10,8 @@ import notify from 'devextreme/ui/notify';
 })
 
 export class ListarSolicitudesComponent implements OnInit {
+  @ViewChild('modalContent') modalContent: TemplateRef<any>;
+
   formularios: any = [];
   solicitudes: any = [];
   views: any = {
@@ -16,10 +19,18 @@ export class ListarSolicitudesComponent implements OnInit {
     user: true
   };
   interval: any;
+  detalle: any = {
+    usuario: '',
+    fecha: '',
+    transaccion: '',
+    monto: '',
+    motivo: ''
+  };
 
   constructor(
     private router: Router,
-    private services: SolicitudesProvider
+    private services: SolicitudesProvider,
+    private modal: NgbModal
   ) {}
 
   ngOnInit() {
@@ -28,6 +39,13 @@ export class ListarSolicitudesComponent implements OnInit {
     if (localStorage.getItem('demo_emco_user') === '') {
       this.router.navigate(['/authentication/login']);
     } else {
+      this.detalle = {
+        usuario: '',
+        fecha: '',
+        transaccion: '',
+        monto: '',
+        motivo: ''
+      };
       const usuario = JSON.parse(localStorage.getItem('demo_emco_user'));
       if (usuario.de_nombre_dpto === null) {
         this.getAllFormularios();
@@ -131,5 +149,17 @@ export class ListarSolicitudesComponent implements OnInit {
         window.open(documento);
       }
     );
+  }
+
+  detallar(data) {
+    console.log('detallar', data.data.de_id_formulario);
+    this.detalle = {
+      usuario: data.data.de_usuario,
+      fecha: data.data.de_fecha_creacion,
+      transaccion: data.data.de_transaccion,
+      monto: data.data.de_valor_solicitud,
+      motivo: data.data.de_justificacion
+    };
+    this.modal.open(this.modalContent);
   }
 }

@@ -16,8 +16,24 @@
                     <dxi-column dataField="de_fecha_creacion" caption="Fecha" dataType="date" [width]="100"></dxi-column>
                     <dxi-column dataField="de_valor_solicitud" caption="Monto ($)" [width]="100" format="currency"></dxi-column>
                     <dxi-column dataField="de_justificacion" caption="Justificación/Motivo"></dxi-column>
+                    <dxi-column dataField="de_estado_id" caption="" cellTemplate="detalleCellTemplate" [width]="50"></dxi-column>
+                    <dxi-column dataField="de_estado_id" caption="" cellTemplate="downloadCellTemplate" [width]="50"></dxi-column>
                     <dxi-column dataField="de_estado_id" caption="Estado" cellTemplate="estadoCellTemplate" [width]="150"></dxi-column>
                     <dxi-column dataField="de_estado_id" caption="Acción" cellTemplate="aprobacionCellTemplate" [width]="150"></dxi-column>
+
+                    <div *dxTemplate="let estado of 'detalleCellTemplate'">
+                        <button class="btn btn-success btn-sm" (click)="detallar(estado)">
+                          <i class="mdi mdi-eye"></i>
+                        </button>
+                    </div>
+
+                    <div *dxTemplate="let estado of 'downloadCellTemplate'">
+                        <div *ngIf="estado.data.de_adjunto === '1'">
+                            <button class="btn btn-info btn-sm" (click)="download(estado)">
+                              <i class="mdi mdi-download"></i>
+                            </button>
+                        </div>
+                    </div>
 
                     <div *dxTemplate="let estado of 'estadoCellTemplate'">
                         <span class="label label-inverse" *ngIf="estado.value === '1'">Pendiente Aprobar</span>
@@ -29,11 +45,6 @@
                         <div *ngIf="estado.value === '1'">
                             <button class="btn btn-success btn-sm" (click)="aprobar(estado)">Aprobar</button>
                             <button class="btn btn-danger btn-sm" (click)="rechazar(estado)">Rechazar</button>
-                        </div>
-                        <div *ngIf="estado.data.de_adjunto === '1'">
-                            <button class="btn btn-info btn-sm" (click)="download(estado)">
-                              <i class="mdi mdi-download"></i>
-                            </button>
                         </div>
                     </div>
 
@@ -72,3 +83,42 @@
         </div>
     </div>
 </div>
+
+<ng-template #modalContent let-close="close">
+    <div class="modal-header">
+        <h5 class="modal-title">Detalle {{ detalle.transaccion }}</h5>
+        <button type="button" class="close" (click)="close()"> <span aria-hidden="true">&times;</span> </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="form-group">
+                    <label style="font-weight: bold;">Usuario</label> {{ detalle.usuario }}
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label style="font-weight: bold;">Fecha</label> {{ detalle.fecha }}
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label style="font-weight: bold;">Transacción</label> {{ detalle.transaccion }}
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label style="font-weight: bold;">Monto</label> ${{ detalle.monto }}
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="form-group">
+                    <label style="font-weight: bold;">Motivo</label> {{ detalle.motivo }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" (click)="close()">OK</button>
+    </div>
+</ng-template>
